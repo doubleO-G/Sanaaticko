@@ -1,4 +1,8 @@
 Check up on sail dockerization
+    run composer
+    composer install
+    then sail up
+    - check on default docker
 
 added a docker file, not used
 
