@@ -6,5 +6,10 @@ Check up on sail dockerization
 
 added a docker file, not used
 
+payments gateway integration
+- pesapal
+- safaricom
+
+
 git config --global user.name "Tony"
 git config --global user.email "jayton006@gmail.com"
