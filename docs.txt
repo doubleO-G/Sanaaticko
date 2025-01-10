@@ -1,0 +1,6 @@
+Check up on sail dockerization
+
+added a docker file, not used
+
+git config --global user.name "Tony"
+git config --global user.email "jayton006@gmail.com"

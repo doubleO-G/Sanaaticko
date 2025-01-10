@@ -1,6 +1,6 @@
 <?php
-require_once '../lb_helper.php'; // Include LicenseBox external/client api helper file
-$api = new LicenseBoxExternalAPI(); // Initialize a new LicenseBoxAPI object
+// require_once '../lb_helper.php'; // Include LicenseBox external/client api helper file
+// $api = new LicenseBoxExternalAPI(); // Initialize a new LicenseBoxAPI object
 ?>
 <!DOCTYPE html>
 <html>
