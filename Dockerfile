@@ -1,32 +1,65 @@
-# Use the official PHP latest Alpine image with FPM
-FROM php:latest-alpine
+# Use the official PHP Alpine Linux image as a parent image
+FROM php:8.3.7-fpm-alpine
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install dependencies for PHP and Laravel
-RUN apk --no-cache add \
+
+# Install system dependencies
+RUN apk update && \
+    apk add --no-cache \
     libpng-dev \
     libjpeg-turbo-dev \
-    libfreetype6-dev \
+    freetype-dev \
     libzip-dev \
-    git \
-    unzip \
-    bash \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd zip pdo pdo_mysql
+    curl \
+    nodejs \
+    npm \
+    && rm -rf /var/cache/apk/*
 
-# Install Composer globally
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd pdo_mysql zip mysqli
+
+
+# Set permissions
+# RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+RUN chown -R www-data:www-data /var/www/html
+
+
+
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy the Laravel application files into the container
+# Copy composer.json and composer.lock
+# COPY composer.json composer.lock ./
+
+# Copy the rest of the application
 COPY . .
 
-# Set proper permissions for Laravel
-RUN chown -R www-data:www-data /var/www
+# Install application dependencies
 
-# Expose the port the app will run on
-EXPOSE 9000
+ # Check directory contents before `composer install`
+RUN ls -la /var/www/html 
+
+RUN composer install --no-scripts --no-autoloader --verbose
+
+ # Check directory contents after `composer install`
+RUN ls -la /var/www/html 
+
+
+# Generate optimized autoload files
+RUN composer dump-autoload --optimize
+
+
+# Expose port 9000 to communicate with Nginx or other web server
+# EXPOSE 9000
+
 
 # Start PHP-FPM
-CMD ["php-fpm"]
+CMD ["php-fpm", "-F"]
+# CMD ["php", "artisan", "serve"]

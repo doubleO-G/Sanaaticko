@@ -2,7 +2,10 @@ Check up on sail dockerization
     run composer
     composer install
     then sail up
+
+
     - check on default docker
+    - 500 server error, debug this issue
 
 added a docker file, not used
 
