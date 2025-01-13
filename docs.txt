@@ -5,7 +5,18 @@ Check up on sail dockerization
 
 
     - check on default docker
-    - 500 server error, debug this issue
+    - 500 server error, debug this issue... (it was permisiions, ownership, debug set to true)
+
+    chmod -R 775 /var/www/html/storage
+    chmod -R 775 /var/www/html/bootstrap/cache
+    chmod -R 775 /var/www/html/public
+
+    chown -R www-data:www-data /var/www/html/storage
+    chown -R www-data:www-data /var/www/html/bootstrap/cache
+    chown -R www-data:www-data /var/www/html/public
+
+    php artisan key:generate
+
 
 added a docker file, not used
 

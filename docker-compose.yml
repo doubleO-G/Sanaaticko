@@ -6,6 +6,7 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx/site.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www/html
     ports:
       - "8547:8547"
     networks:
