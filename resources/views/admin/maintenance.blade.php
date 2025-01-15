@@ -37,7 +37,7 @@
     @else
         <img src="{{ asset('images/main2.jpg') }}" title="" />
     @endif
-    <p class="text-white h1">{{ $setting->maintenance_text }}</p>
+    <p class="text-white display-1 ">{{ $setting->maintenance_text }}</p>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">

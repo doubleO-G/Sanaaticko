@@ -3,22 +3,21 @@ Check up on sail dockerization
     composer install
     then sail up
 
+    copy .env before building
 
-    - check on default docker
-    - 500 server error, debug this issue... (it was permisiions, ownership, debug set to true)
-
-    chmod -R 775 /var/www/html/storage
-    chmod -R 775 /var/www/html/bootstrap/cache
-    chmod -R 775 /var/www/html/public
+    import sql 
 
     chown -R www-data:www-data /var/www/html/storage
-    chown -R www-data:www-data /var/www/html/bootstrap/cache
+    chown -R www-data:www-data /var/www/html/bootstrap
     chown -R www-data:www-data /var/www/html/public
+
+    chmod -R 775 /var/www/html/storage
+    chmod -R 775 /var/www/html/bootstrap
+    chmod -R 775 /var/www/html/public
 
     php artisan key:generate
 
 
-added a docker file, not used
 
 payments gateway integration
 - pesapal
