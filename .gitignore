@@ -1,7 +1,7 @@
 /node_modules
-/public/hot
-/public/storage
-/public/images/brands
+# /public/hot
+# /public/storage
+# /public/images/brands
 # /public/images/upload
 # /storage/*.key
 /vendor
@@ -16,9 +16,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .vscode/settings.json
-public/images/upload
+# public/images/upload
 .env
 /Modules
-public/modules
+# public/modules
 .idea
-public/ticket.pdf
+# public/ticket.pdf
