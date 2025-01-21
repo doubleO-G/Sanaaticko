@@ -188,7 +188,7 @@
                                     <div class="flex justify-center">
                                         <p
                                             class="font-poppins font-medium text-sm leading-4 text-danger text-center rounded-full bg-danger-light w-16 py-1">
-                                            {{ __('Paid') }}</p>
+                                            {{ __('Paid Event') }}</p>
                                     </div>
                                     <p class="font-poppins font-medium text-xl leading-7 text-primary text-center py-4">
                                         {{ $item->name }}</p>
@@ -245,7 +245,7 @@
                                 <div class="flex justify-center">
                                     <p
                                         class="font-poppins font-medium text-sm leading-4 text-primary text-center rounded-full bg-primary-light w-16 py-1">
-                                        {{ __('free') }}</p>
+                                        {{ __('Free Event') }}</p>
                                 </div>
                                 <p class="font-poppins font-medium text-xl leading-7 text-primary text-center py-4">
                                     {{ $item->name }}</p>
