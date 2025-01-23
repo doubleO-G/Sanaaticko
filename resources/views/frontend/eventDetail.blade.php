@@ -167,8 +167,7 @@
                     <div class="p-4 bg-white shadow-lg rounded-md xlg:mt-10 lg:mt-20">
                         <p class="font-poppins font-semibold text-2xl leading-8 text-black pb-3">{{ __('Location') }}
                         </p>
-                        <div id="map" class="mt-5" style="width:100%;height:400px;">
-                        </div>
+                        {{ $data->address }}
                     </div>
                 </div>
             </div>
@@ -188,7 +187,7 @@
                                     <div class="flex justify-center">
                                         <p
                                             class="font-poppins font-medium text-sm leading-4 text-danger text-center rounded-full bg-danger-light w-16 py-1">
-                                            {{ __('Paid Event') }}</p>
+                                            {{ __('Paid') }}</p>
                                     </div>
                                     <p class="font-poppins font-medium text-xl leading-7 text-primary text-center py-4">
                                         {{ $item->name }}</p>
@@ -245,7 +244,7 @@
                                 <div class="flex justify-center">
                                     <p
                                         class="font-poppins font-medium text-sm leading-4 text-primary text-center rounded-full bg-primary-light w-16 py-1">
-                                        {{ __('Free Event') }}</p>
+                                        {{ __('free') }}</p>
                                 </div>
                                 <p class="font-poppins font-medium text-xl leading-7 text-primary text-center py-4">
                                     {{ $item->name }}</p>

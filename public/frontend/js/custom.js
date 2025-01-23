@@ -482,8 +482,12 @@ $(document).ready(function () {
         }
     });
 
-    let preType = "";
+    var usr_countrycode;
+    $(document).on('change', '.usr_countrycode', function() {
+        usr_countrycode = $("#usr_countrycode option:selected").val()
+    });
 
+    let preType = "";
     $(".payments input[type=radio][name=payment_type] ").on(
         "change",
         function () {
@@ -502,6 +506,34 @@ $(document).ready(function () {
             var flutterRadio = document.querySelector(
                 '.payments input[type=radio][name="payment_type"][value="FLUTTERWAVE"]'
             );
+
+            // user inputs
+            var usr_login_email = $(
+                'input[name="usr_login_email"]'
+            ).val();
+            var usr_login_password = $(
+                'input[name="usr_login_password"]'
+            ).val();
+            var usr_email = $(
+                'input[name="usr_email"]'
+            ).val();
+            var usr_password = $(
+                'input[name="usr_password"]'
+            ).val();
+            var usr_first_name = $(
+                'input[name="usr_first_name"]'
+            ).val();
+            var usr_last_name = $(
+                'input[name="usr_last_name"]'
+            ).val();
+            var usr_phone = $(
+                'input[name="usr_phone"]'
+            ).val();
+            var usr_auth = $(
+                'input[name="usr_auth"]'
+            ).val();
+
+            const savedTab = localStorage.getItem("activeTab")
 
             if (ticketDateInput && !ticketDateInput.value) {
                 $(".ticket_date").text("The ticket date is required");
@@ -537,49 +569,84 @@ $(document).ready(function () {
                 window.r = new Razorpay(razorpayOptions);
                 r.open();
             } else if (flutterRadio && flutterRadio.checked) {
+
                 var _requestData = {
-                    payment: $("#payment").val(),
-                    payment_token: null,
-                    payment_type: "FLUTTERWAVE",
-                    ticket_id: $("#ticket_id").val(),
-                    coupon_code: $("#coupon_id").val(),
-                    tax: $("#tax_total").val(),
-                    quantity: $("#quantity").val(),
-                    ticket_date: $("#onetime").val(),
-                    selectedSeats: $("#selectedSeats").val(),
-                    selectedSeatsId: $("#selectedSeatsId").val(),
-                    payment_status: 0,
-                    payment_for: "ticket",
-                    platform: "eventrightpro",
-                };
-                FlutterwaveCheckout({
-                    public_key: $("input[name=flutterwave_key]").val(),
-                    tx_ref:
-                        Math.floor(Math.random() * (1000 - 9999 + 1)) + 9999,
-                    amount: $("#payment").val(),
-                    currency: $("input[name=currency_code]").val(),
-                    payment_options: " ",
-                    customer: {
-                        email: $("input[name=email]").val(),
-                        phone_number: $("input[name=phone]").val(),
-                        name: $("input[name=name]").val(),
-                    },
-                    meta:_requestData,
-                    callback: function (data) {
-                        if (data.status == "successful") {
-                            window.location.href = "/my-tickets";
+                        payment: $("#payment").val(),
+                        payment_token: null,
+                        payment_type: "FLUTTERWAVE",
+                        ticket_id: $("#ticket_id").val(),
+                        coupon_code: $("#coupon_id").val(),
+                        tax: $("#tax_total").val(),
+                        quantity: $("#quantity").val(),
+                        ticket_date: $("#onetime").val(),
+                        selectedSeats: $("#selectedSeats").val(),
+                        selectedSeatsId: $("#selectedSeatsId").val(),
+                        payment_status: 0,
+                        payment_for: "ticket",
+                        platform: "eventrightpro",
+                    };
+
+                if(parseInt(usr_auth) != 1 && usr_auth != '1') {
+
+                    var formData = {
+                        first_name: usr_first_name,
+                        last_name: usr_last_name,
+                        phone: usr_phone,
+                        countrycode: usr_countrycode,
+                        email_login: usr_login_email,
+                        email: usr_email,
+                        password_login: usr_login_password,
+                        password: usr_password,
+                        activeTab: savedTab,
+                    };
+
+                    if(savedTab == "tab1") {
+                        if(!usr_login_email || !usr_login_password) {
+                            alert("Ensure all the details are provided")
+                            return
                         }
-                    },
-                    onClose: function () {
-                        if (confirm("Are you sure you want to go to home page?")) {
-                            window.location.href = window.location.origin;
+                    }else {
+                        if(usr_email == "" || usr_password == "" || usr_first_name == "" || usr_last_name == "" || usr_countrycode == "" || usr_phone == "") {
+                            alert("Ensure all the details are provided")
+                            return
                         }
-                    },
-                    customizations: {
-                        title: "Ticket Payment",
-                        description: "Ticket Payment",
-                    },
-                });
+                    }
+
+                    createaccountthenorder(formData,_requestData);
+
+                }else {
+
+                    FlutterwaveCheckout({
+                        public_key: $("input[name=flutterwave_key]").val(),
+                        tx_ref:
+                            Math.floor(Math.random() * (1000 - 9999 + 1)) + 9999,
+                        amount: $("#payment").val(),
+                        currency: $("input[name=currency_code]").val(),
+                        payment_options: " ",
+                        customer: {
+                            email: $("input[name=email]").val(),
+                            phone_number: $("input[name=phone]").val(),
+                            name: $("input[name=name]").val(),
+                        },
+                        meta:_requestData,
+                        callback: function (data) {
+                            if (data.status == "successful") {
+                                window.location.href = "/my-tickets";
+                            }
+                        },
+                        onClose: function () {
+                            if (confirm("Are you sure you want to go to home page?")) {
+                                window.location.href = window.location.origin;
+                            }
+                        },
+                        customizations: {
+                            title: "Ticket Payment",
+                            description: "Ticket Payment",
+                        },
+                    });
+
+                }
+
             }
 
             $("#paypal-button-container").html("");
@@ -730,6 +797,65 @@ $(document).ready(function () {
             }
         }
     );
+
+    // Create Order
+    function createaccountthenorder(formData,_requestData) {
+        
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/signinOrder",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            beforeSend: function () {},
+            complete: function () {},
+            success: function (data) {
+                if (data.success == true && data.user) {
+
+                    FlutterwaveCheckout({
+                        public_key: $("input[name=flutterwave_key]").val(),
+                        tx_ref:
+                            Math.floor(Math.random() * (1000 - 9999 + 1)) + 9999,
+                        amount: $("#payment").val(),
+                        currency: $("input[name=currency_code]").val(),
+                        payment_options: " ",
+                        customer: {
+                            email: data.user.email,
+                            phone_number: data.user.phone,
+                            name: data.user.first_name,
+                        },
+                        meta:_requestData,
+                        callback: function (data) {
+                            if (data.status == "successful") {
+                                window.location.href = "/my-tickets";
+                            }
+                        },
+                        onClose: function () {
+                            if (confirm("Are you sure you want to go to home page?")) {
+                                window.location.href = window.location.origin;
+                            }
+                        },
+                        customizations: {
+                            title: "Ticket Payment",
+                            description: "Ticket Payment",
+                        },
+                    });
+
+                }else {
+                    alert("Error authenticating user")
+                    window.location.reload()
+                }
+            },
+            error: function (data) {
+                if (data.status === 500) {
+                    alert("Error authenticating user")
+                }
+            },
+        });
+
+    }
 
     // Create Order
     function createOrder(requestData) {
@@ -1052,6 +1178,7 @@ $(document).ready(function () {
     });
     // Flutterwave
     $("#flutterwaveWallet").on("click", function () {
+
         var _requestData = {
             payment_for: "wallet",
             platform: "eventrightpro",
