@@ -1,12 +1,17 @@
 Check up on sail dockerization
     run composer
     composer install
-    then sail up
+    then sail up ...... #for local only with sail not docker
+    # docker-compose-sail.yml file is where its at
 
     copy .env before building
 
     import sql 
 
+    sudo docker exec -it ticketsapp sh
+    
+    composer install
+    
     chown -R www-data:www-data /var/www/html/storage
     chown -R www-data:www-data /var/www/html/bootstrap
     chown -R www-data:www-data /var/www/html/public
