@@ -171,13 +171,9 @@
                 {{ __('Sign in to your account') }}</p>
             <form action="{{ url('user/login') }}" method="post" data-qa="form-login" name="login">
                 @csrf
-                <div class="pt-7 flex justify-center">
-                    <a id="googleLoginBtnLink"><button type="button" class="login-with-google-btn" id="googleLoginBtn" {{ $setting->enable_google_signin == 1 ? '' : 'disabled' }}></button></a>
-                         </div>
                 <input type="hidden" value="{{ url()->previous() }}" name="url">
 
                 <div class="pt-12">
-                          
                     <div
                         class="flex sm:space-x-7 justify-center xxsm:space-y-5 msm:space-y-0 msm:space-x-5 xsm:space-x-0 xxsm:space-x-0 xxsm:mx-10.0 xxsm:flex-wrap xsm:flex-wrap msm:flex-nowrap">
                         <label for="default-radio-1" class="w-full">
@@ -188,14 +184,14 @@
                                 <span>{{ __('User') }}</span>
                             </div>
                         </label>
-                        <!--<label for="default-radio-2" class="w-full">
-                            <!--<div
+                        <label for="default-radio-2" class="w-full">
+                            <div
                                 class="border border-gray-light py-3.5 px-5 rounded-lg text-gray-100 w-full font-normal font-poppins text-base leading-6 flex items-center">
                                 <input id="default-radio-2" type="radio" value="org" name="type"
                                     class="w-5 h-5 mr-2 border select border-gray-light hover:border-gray-light focus:outline-none" onchange="updateGoogleLoginBtn()">
                                 <span>{{ __('Organizer') }}</span>
-                            </div>--
-                        </label>-->
+                            </div>
+                        </label>
                     </div>
 
                 </div>
@@ -245,9 +241,9 @@
                     <button
                         class="w-full py-4 text-sm font-medium leading-4 text-white rounded-lg font-poppins bg-primary focus:outline-none">{{ __('Sign In') }}</button>
                 </div>
-                <!--<div class="pt-7 flex justify-center">
+                <div class="pt-7 flex justify-center">
                     <a id="googleLoginBtnLink"><button type="button" class="login-with-google-btn" id="googleLoginBtn" {{ $setting->enable_google_signin == 1 ? '' : 'disabled' }}></button></a>
-                </div>-->
+                </div>
             </form>
             <div class="flex justify-center pt-6">
                 <h1 class="pt-4 text-base font-medium leading-5 text-left font-poppins text-gray">
@@ -256,7 +252,7 @@
                         class="text-base text-primary text-medium">{{ __('Create Account') }}</a>
                 </h1>
             </div>
-            <!--<div class="text-base text-center text-primary font-medium mt-3"><a href="{{ url('/admin/login') }}">Admin Login</a></div>-->
+            <div class="text-base text-center text-primary font-medium mt-3"><a href="{{ url('/admin/login') }}">Admin Login</a></div>
         </div>
     </div>
 </body>

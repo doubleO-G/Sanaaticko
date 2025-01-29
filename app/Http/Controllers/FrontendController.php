@@ -590,6 +590,76 @@ class FrontendController extends Controller
         }
         return redirect('user/login')->with(['success' => "Congratulations! Your account registration was successful. You can now log in to your account and start using our services. Thank you for choosing our platform"]);
     }
+
+
+    public function signinOrder(Request $request) {
+
+        $data = $request->all();
+        if($request->activeTab == "tab1") {
+
+            try {
+
+                $userdata = array(
+                        'email' => $request->email_login,
+                        'password' => $request->password_login,
+                    );
+                if (Auth::guard('appuser')->attempt($userdata)) {
+                    $user =  Auth::guard('appuser')->user();
+                    $user['token'] = $user->createToken('eventRight')->accessToken;
+                    return response()->json(['msg' => 'Authentication success', 'user' => $user, 'success' => true], 200);
+                }else {
+                    return response()->json(['msg' => 'Authentication failed', 'success' => false], 500);
+                }
+
+            } catch (\Exception $e) {
+                $resp = [
+                    "message" => $e->getMessage(),
+                    "statusCode" => 500,
+                    "path" => request()->route()->uri
+                ];
+            
+                Log::error($resp);
+                return response()->json($resp);
+            }
+
+
+        }elseif($request->activeTab == "tab2") {
+
+            $userdata = array(
+                    'name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'phone' => "+" . $request->countrycode . $request->phone,
+                    'image' => "defaultuser.png",
+                    'status' => 1,
+                    'provider' => "LOCAL",
+                    'language' => Setting::first()->language,
+                    'is_verify' => 1,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                );
+            $userResponse = AppUser::create($userdata);
+            if($userResponse) {
+
+                $udata = array(
+                    'email' => $request->email,
+                    'password' => $request->password,
+                );
+
+                if (Auth::guard('appuser')->attempt($udata)) {
+                    $user =  Auth::guard('appuser')->user();
+                    $user['token'] = $user->createToken('eventRight')->accessToken;
+                    return response()->json(['msg' => 'Authentication success', 'user' => $user, 'success' => true], 200);
+                }else {
+                    return response()->json(['msg' => 'Authentication failed', 'success' => false], 500);
+                }
+
+            }
+
+        }
+
+    }
+
+
     public function LoginByMail($id)
     {
         $user = AppUser::find($id);

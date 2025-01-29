@@ -32,9 +32,17 @@
     <!-- Template Main CSS File -->
     <link href="{{ url('frontend/css/style.css') }}" rel="stylesheet">
     <link href="{{ url('frontend/css/custom.css') }}" rel="stylesheet">
-@if (session('direction') == 'rtl')
-    <link rel="stylesheet" href="{{ url('frontend/css/rtl.css') }}">
-@endif
+    @if (session('direction') == 'rtl')
+        <link rel="stylesheet" href="{{ url('frontend/css/rtl.css') }}">
+    @endif
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSNRY7H7X3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XSNRY7H7X3');
+    </script>
 </head>
 
 <body>

@@ -1,6 +1,14 @@
 @extends('frontend.master', ['activePage' => 'checkout'])
 @section('title', __('Checkout'))
 @section('content')
+    <style>
+        .tab-button.active {
+            @apply text-blue-500 border-blue-500;
+        }
+    </style>
+    @php
+        $phone = \DB::table('country')->get();
+    @endphp
     {{-- content --}}
     <div class="pb-20 bg-scroll min-h-screen" style="background-image: url('{{ asset('images/events.png') }}')">
         {{-- scroll --}}
@@ -15,9 +23,9 @@
         <input type="hidden" name="totalAmountTax" id="totalAmountTax" value="{{ $data->totalAmountTax }}">
         <input type="hidden" name="totalPersTax" id="totalPersTax" value="{{ $data->totalPersTax }}">
         <input type="hidden" name="flutterwave_key" value="{{ \App\Models\PaymentSetting::find(1)->ravePublicKey }}">
-        <input type="hidden" name="email" value="{{ auth()->guard('appuser')->user()->email }}">
-        <input type="hidden" name="phone" value="{{ auth()->guard('appuser')->user()->phone }}">
-        <input type="hidden" name="name" value="{{ auth()->guard('appuser')->user()->name }}">
+        <input type="hidden" name="email" value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->email : '' }}">
+        <input type="hidden" name="phone" value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->phone : '' }}">
+        <input type="hidden" name="name" value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->name : '' }}">
         <input type="hidden" name="flutterwave_key" value="{{ \App\Models\PaymentSetting::find(1)->ravePublicKey }}">
         <div id="ticketorder">
             @csrf
@@ -148,10 +156,131 @@
                                         'seatLimit' => $data->ticket_per_order,
                                     ])
                                 @endif
+                                <input type="hidden" name="usr_auth" value="{{ Auth::guard('appuser')->check() }}">
+                                
+                                @if (!Auth::guard('appuser')->check())
+                                <div class="card w-full shadow-lg p-5 rounded-lg  bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5 mt-5">
+                                    <p class="font-poppins font-semibold text-2xl leading-8 text-black">
+                                            {{ __('Account Details') }}</p>
+                                    <div class="card-body mt-2">
+                                        <div>
+                                            <div class="flex border-b border-gray-200" id="tabs">
+                                                <button
+                                                    data-tab="tab1"
+                                                    class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2"
+                                                >
+                                                    Existing Customer
+                                                </button>
+                                                <button
+                                                    data-tab="tab2"
+                                                    class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2"
+                                                >
+                                                    New Customer
+                                                </button>
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <div id="tab1" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
+                                                    <div class="grid grid-cols-2 gap-5 sm:grid-cols-2 msm:grid-cols-2 xxsm:grid-cols-1">
+                                                        <div class="pt-5">
+                                                            <label for="email"
+                                                                class="text-base font-medium leading-6 text-black font-poppins">{{ __('Email') }}</label>
+                                                            <input type="email" name="usr_login_email" id=""
+                                                                class="z-20 block w-full p-3 text-sm font-normal text-black border rounded-lg font-poppins border-gray-light focus:outline-none"
+                                                                placeholder="{{ __('Your Email') }}">
+                                                        </div>
+                                                        <div class="pt-5 ">
+                                                            <label for="password"
+                                                                class="text-base font-medium leading-6 text-black font-poppins">{{ __('Password') }}</label>
+                                                            <div class="relative">
+                                                                <input type="password" name="usr_login_password" id="password"
+                                                                    class="z-30 block w-full p-3 text-sm font-normal text-black border rounded-lg focus:outline-none font-poppins border-gray-light"
+                                                                    placeholder="{{ __('Password') }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tab2" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
+                                                    <div class="grid grid-cols-2 gap-5 sm:grid-cols-2 msm:grid-cols-2 xxsm:grid-cols-1">
+                                                        <div class="pt-5 userInput">
+                                                            <label for="name"
+                                                                class="font-poppins font-medium text-base leading-6 text-black">{{ __('First Name') }}</label>
+                                                            <input type="text" name="usr_first_name"
+                                                                id=""class="w-full text-sm font-poppins font-normal text-black block p-3 z-20 rounded-lg border border-gray-light focus:outline-none"
+                                                                placeholder="{{ __('First Name') }}">
+                                                        </div>
+                                                        <div class="pt-5">
+                                                            <label for="last_name"
+                                                                class="font-poppins font-medium text-base leading-6 text-black">{{ __('Last Name') }}</label>
+                                                            <input type="text" name="usr_last_name" id="" required
+                                                                class="w-full text-sm font-poppins font-normal text-black block p-3 z-20 rounded-lg border border-gray-light focus:outline-none"
+                                                                placeholder="{{ __('Last Name') }}">
+                                                        </div>
+
+                                                        <div class="">
+                                                            <label for="number"
+                                                                class="font-poppins font-medium text-base leading-6 text-black">{{ __('Contact Number') }}</label>
+                                                            <div class="flex space-x-3">
+                                                                <div class="w-[35%]">
+                                                                    <select id="usr_countrycode" name="usr_countrycode"
+                                                                        class="usr_countrycode bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                        <option value="" disabled selected>{{ __('Select Country') }}</option>
+                                                                        @foreach ($phone as $item)
+                                                                            <option class=" " value="{{ $item->phonecode }}">
+                                                                                {{ $item->name . '(+' . $item->phonecode . ')' }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="w-[100%]">
+                                                                    <input type="number" name="usr_phone" id=""
+                                                                        class="w-full text-sm font-poppins font-normal text-black block p-3 z-20 rounded-md border border-gray-light focus:outline-none"
+                                                                        placeholder="{{ __('Number') }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="email"
+                                                                class="font-poppins font-medium text-base leading-6 text-black">{{ __('Email Address') }}</label>
+                                                            <input type="email" name="usr_email" id="" required
+                                                                class="w-full text-sm font-poppins font-normal text-black block p-3 z-20 rounded-lg border border-gray-light focus:outline-none"
+                                                                placeholder="{{ __('Email Address') }}">
+                                                        </div>
+                                                        <div class=" ">
+                                                            <label for="password"
+                                                                class="font-poppins font-medium text-base leading-6 text-black">{{ __('Password') }}</label>
+                                                            <div class="relative">
+                                                                <input type="password" name="usr_password" id="password" required
+                                                                    class="w-full focus:outline-none text-sm font-poppins font-normal text-black block p-3 z-30 rounded-lg border border-gray-light"
+                                                                    placeholder="{{ __('Password') }}">
+                                                                <span
+                                                                    class="absolute right-2.5 bottom-2.5 text-xl font-poppins font-medium text-gray px-2"><i
+                                                                        class="fa-regular fa-eye text-primary" id="togglePassword"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+
                                 @if ($data->available_qty > 0)
                                     <div
                                         class="w-full shadow-lg p-5 rounded-lg  bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5 mt-5">
-                                        <p class="font-poppins font-semibold text-2xl leading-8 text-black pb-3 pt-10">
+                                        @if (!Auth::guard('appuser')->check())
+                                            <div id="alert" class="hidden flex items-center p-4 mb-0 border rounded-lg bg-blue-50 border-blue-300 text-blue-800" role="alert">
+                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-8 3a1 1 0 01-.707-.293l-3-3a1 1 0 111.414-1.414L10 10.586l2.293-2.293a1 1 0 011.414 1.414l-3 3A1 1 0 0110 13zm0-10a7 7 0 100 14 7 7 0 000-14z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="sr-only">Info</span>
+                                                <div>
+                                                    <span class="font-medium">Info alert!</span> Before choosing your payment method, ensure you provide your account details.
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <p class="font-poppins font-semibold text-2xl leading-8 text-black pb-3 pt-5">
                                             {{ __('Payment Methods') }}</p>
 
                                         <div
@@ -432,4 +561,89 @@
         });
     </script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            // track tab selection
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const localStorageKey = 'activeTab';
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove 'active' class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.add('hidden'));
+
+                    // Add 'active' class to the clicked button
+                    button.classList.add('active');
+
+                    // Show the corresponding tab content
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+            document.getElementById('alert').classList.remove('hidden');
+
+            const dismissButtons = document.querySelectorAll('[data-dismiss-target]');
+            dismissButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-dismiss-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Set the first tab as active by default
+            tabButtons[0].classList.add('active');
+            tabContents[0].classList.remove('hidden');
+
+            const togglePassword = document.querySelector("#togglePassword");
+            togglePassword.addEventListener("click", function(e) {
+                // toggle the type attribute
+                const type = password.getAttribute("type") === "password" ? "text" : "password";
+                password.setAttribute("type", type);
+                // toggle the eye / eye slash icon
+                this.classList.toggle("fa-eye-slash");
+            });
+
+            // Function to activate a tab
+            const activateTab = (tabId) => {
+                // Remove active class from all buttons and hide all tab contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+
+                // Activate the selected tab
+                const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+                const activeContent = document.getElementById(tabId);
+                if (activeButton && activeContent) {
+                    activeButton.classList.add('active');
+                    activeContent.classList.remove('hidden');
+                }
+
+                // Store the active tab in localStorage
+                localStorage.setItem(localStorageKey, tabId);
+            };
+
+            // Event listeners for tab buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    activateTab(tabId);
+                });
+            });
+
+            // Load the last selected tab from localStorage
+            const savedTab = localStorage.getItem(localStorageKey) || 'tab1';
+            activateTab(savedTab);
+
+        }); 
+    </script>
+    <script>
+        $('#location').select2();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
