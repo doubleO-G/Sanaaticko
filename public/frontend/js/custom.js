@@ -800,7 +800,7 @@ $(document).ready(function () {
 
     // Create Order
     function createaccountthenorder(formData,_requestData) {
-        
+
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -813,6 +813,8 @@ $(document).ready(function () {
             complete: function () {},
             success: function (data) {
                 if (data.success == true && data.user) {
+
+
 
                     FlutterwaveCheckout({
                         public_key: $("input[name=flutterwave_key]").val(),

@@ -11,7 +11,7 @@ use App\Http\Controllers\WalletController;
 use App\Models\AppUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\CalendarController;
+//use App\Http\Controllers\CalendarController;
 
 Route::group(['middleware' => ['mode', 'XSS']], function () {
 
@@ -86,7 +86,7 @@ Route::group(['middleware' => ['mode', 'XSS']], function () {
             Route::post('/upload-profile-image', [FrontendController::class, 'uploadProfileImage']);
             Route::get('/my-tickets', [FrontendController::class, 'userTickets'])->name('myTickets');
             Route::get('/my-ticket/{id}', [FrontendController::class, 'userOrderTicket']);
-            Route::get('/add-to-calendar/{order_id}', [CalendarController::class, 'createGoogleCalendarLinkForOrder']);
+//            Route::get('/add-to-calendar/{order_id}', [CalendarController::class, 'createGoogleCalendarLinkForOrder']);
 
             Route::get('/update_profile', [FrontendController::class, 'update_profile']);
             Route::post('/update_user_profile', [FrontendController::class, 'update_user_profile']);

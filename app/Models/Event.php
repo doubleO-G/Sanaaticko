@@ -71,7 +71,7 @@ class Event extends Model
     {
         $timezone = Setting::find(1)->timezone;
         $date = Carbon::now($timezone);
-        return intval(Ticket::where([['event_id', $this->attributes['id']], ['is_deleted', 0], ['status', 1], ['end_time', '>=', $date->format('Y-m-d H:i:s')], ['start_time', '<=', $date->format('Y-m-d H:i:s')]])->sum('quantity'));
+        return intval(Ticket::where([['event_id', $this->attributes['id']], ['is_deleted', 0], ['status', 1]])->sum('quantity'));
     }
 
     /**

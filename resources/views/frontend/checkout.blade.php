@@ -157,11 +157,11 @@
                                     ])
                                 @endif
                                 <input type="hidden" name="usr_auth" value="{{ Auth::guard('appuser')->check() }}">
-                                
+
                                 @if (!Auth::guard('appuser')->check())
                                 <div class="card w-full shadow-lg p-5 rounded-lg  bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5 mt-5">
                                     <p class="font-poppins font-semibold text-2xl leading-8 text-black">
-                                            {{ __('Account Details') }}</p>
+                                            Customer Details</p>
                                     <div class="card-body mt-2">
                                         <div>
                                             <div class="flex border-b border-gray-200" id="tabs">
@@ -169,14 +169,14 @@
                                                     data-tab="tab1"
                                                     class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2"
                                                 >
-                                                    Existing Customer
+                                                    Enter your details
                                                 </button>
-                                                <button
+                                                {{-- <button
                                                     data-tab="tab2"
                                                     class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2"
                                                 >
                                                     New Customer
-                                                </button>
+                                                </button> --}}
                                             </div>
 
                                             <div class="mt-4">
@@ -191,16 +191,16 @@
                                                         </div>
                                                         <div class="pt-5 ">
                                                             <label for="password"
-                                                                class="text-base font-medium leading-6 text-black font-poppins">{{ __('Password') }}</label>
+                                                                class="text-base font-medium leading-6 text-black font-poppins">Phone Number</label>
                                                             <div class="relative">
-                                                                <input type="password" name="usr_login_password" id="password"
-                                                                    class="z-30 block w-full p-3 text-sm font-normal text-black border rounded-lg focus:outline-none font-poppins border-gray-light"
-                                                                    placeholder="{{ __('Password') }}">
+                                                                <input type="number" name="usr_phone" id=""
+                                                                        class="w-full text-sm font-poppins font-normal text-black block p-3 z-20 rounded-md border border-gray-light focus:outline-none"
+                                                                        placeholder="{{ __('Number') }}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="tab2" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
+                                                {{-- <div id="tab2" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
                                                     <div class="grid grid-cols-2 gap-5 sm:grid-cols-2 msm:grid-cols-2 xxsm:grid-cols-1">
                                                         <div class="pt-5 userInput">
                                                             <label for="name"
@@ -259,7 +259,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -640,7 +640,7 @@
             const savedTab = localStorage.getItem(localStorageKey) || 'tab1';
             activateTab(savedTab);
 
-        }); 
+        });
     </script>
     <script>
         $('#location').select2();

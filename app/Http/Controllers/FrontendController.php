@@ -595,54 +595,55 @@ class FrontendController extends Controller
     public function signinOrder(Request $request) {
 
         $data = $request->all();
-        if($request->activeTab == "tab1") {
 
-            try {
+        // if($request->activeTab == "tab1") {
 
-                $userdata = array(
-                        'email' => $request->email_login,
-                        'password' => $request->password_login,
-                    );
-                if (Auth::guard('appuser')->attempt($userdata)) {
-                    $user =  Auth::guard('appuser')->user();
-                    $user['token'] = $user->createToken('eventRight')->accessToken;
-                    return response()->json(['msg' => 'Authentication success', 'user' => $user, 'success' => true], 200);
-                }else {
-                    return response()->json(['msg' => 'Authentication failed', 'success' => false], 500);
-                }
+        //     try {
 
-            } catch (\Exception $e) {
-                $resp = [
-                    "message" => $e->getMessage(),
-                    "statusCode" => 500,
-                    "path" => request()->route()->uri
-                ];
-            
-                Log::error($resp);
-                return response()->json($resp);
-            }
+        //         $userdata = array(
+        //                 'email' => $request->email_login,
+        //                 'password' => $request->password_login,
+        //             );
+        //         if (Auth::guard('appuser')->attempt($userdata)) {
+        //             $user =  Auth::guard('appuser')->user();
+        //             $user['token'] = $user->createToken('eventRight')->accessToken;
+        //             return response()->json(['msg' => 'Authentication success', 'user' => $user, 'success' => true], 200);
+        //         }else {
+        //             return response()->json(['msg' => 'Authentication failed', 'success' => false], 500);
+        //         }
+
+        //     } catch (\Exception $e) {
+        //         $resp = [
+        //             "message" => $e->getMessage(),
+        //             "statusCode" => 500,
+        //             "path" => request()->route()->uri
+        //         ];
+
+        //         Log::error($resp);
+        //         return response()->json($resp);
+        //     }
 
 
-        }elseif($request->activeTab == "tab2") {
+        // }else
+        if($request->activeTab == "tab2") {
 
             $userdata = array(
-                    'name' => $request->first_name,
-                    'last_name' => $request->last_name,
-                    'phone' => "+" . $request->countrycode . $request->phone,
+                    'phone' => $request->phone,
                     'image' => "defaultuser.png",
                     'status' => 1,
                     'provider' => "LOCAL",
                     'language' => Setting::first()->language,
                     'is_verify' => 1,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
+                    'email' => $request->email_login,
+                    'password' => Hash::make($request->email_login),
                 );
-            $userResponse = AppUser::create($userdata);
+                $userResponse = AppUser::create($userdata);
+                Log::info("User Response",['userResponse'=>$userResponse]);
             if($userResponse) {
 
                 $udata = array(
-                    'email' => $request->email,
-                    'password' => $request->password,
+                    'email' => $request->email_login,
+                    'password' =>$request->email_login,
                 );
 
                 if (Auth::guard('appuser')->attempt($udata)) {
@@ -958,8 +959,8 @@ class FrontendController extends Controller
         SEOTools::jsonLd()->addImage($data->imagePath . $data->image);
         $timezone = Setting::find(1)->timezone;
         $date = Carbon::now($timezone);
-        $data->free_ticket = Ticket::where([['event_id', $data->id], ['is_deleted', 0], ['type', 'free'], ['status', 1], ['end_time', '>=', $date->format('Y-m-d H:i:s')], ['start_time', '<=', $date->format('Y-m-d H:i:s')]])->orderBy('id', 'DESC')->get();
-        $data->paid_ticket = Ticket::where([['event_id', $data->id], ['is_deleted', 0], ['type', 'paid'], ['status', 1], ['end_time', '>=', $date->format('Y-m-d H:i:s')], ['start_time', '<=', $date->format('Y-m-d H:i:s')]])->orderBy('id', 'DESC')->get();
+        $data->free_ticket = Ticket::where([['event_id', $data->id], ['is_deleted', 0], ['type', 'free'], ['status', 1]])->orderBy('id', 'DESC')->get();
+        $data->paid_ticket = Ticket::where([['event_id', $data->id], ['is_deleted', 0], ['type', 'paid'], ['status', 1]])->orderBy('id', 'DESC')->get();
         $data->review = Review::where('event_id', $data->id)->orderBy('id', 'DESC')->get();
         foreach ($data->paid_ticket as $value) {
             $used = Order::where('ticket_id', $value->id)->sum('quantity');
@@ -975,6 +976,7 @@ class FrontendController extends Controller
         $appUser = Auth::guard('appuser')->user();
         $rate = round(Review::where('event_id', $data->id)->avg('rate'));
         $show_event_report_form = $setting->show_event_report_form ?? 0;
+
         return view('frontend.eventDetail', compact('currency', 'data', 'images', 'tags', 'appUser', 'rate', 'show_event_report_form'));
     }
 

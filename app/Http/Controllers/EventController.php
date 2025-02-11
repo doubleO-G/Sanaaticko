@@ -115,6 +115,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+
          $request->validate([
             'name' => 'bail|required',
             'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif|max:3048',
@@ -141,6 +142,7 @@ class EventController extends Controller
         } else {
             $data['scanner_id'] = NULL;
         }
+
         $data['security'] = 1;
         if ($request->hasFile('image')) {
 
@@ -149,7 +151,8 @@ class EventController extends Controller
         if (!Auth::user()->hasRole('admin')) {
             $data['user_id'] = Auth::user()->id;
         }
-        $event = Event::create($data);
+
+        Event::create($data);
         return redirect()->route('events.index')->withStatus(__('Event has added successfully.'));
     }
 
