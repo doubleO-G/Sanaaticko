@@ -625,7 +625,7 @@ class FrontendController extends Controller
 
 
         // }else
-        if($request->activeTab == "tab2") {
+        // if($request->activeTab == "tab2") {
 
             $userdata = array(
                     'phone' => $request->phone,
@@ -656,7 +656,7 @@ class FrontendController extends Controller
 
             }
 
-        }
+        // }
 
     }
 
