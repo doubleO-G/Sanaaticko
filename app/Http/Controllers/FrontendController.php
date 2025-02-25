@@ -596,7 +596,7 @@ class FrontendController extends Controller
 
         $data = $request->all();
 
-        // if($request->activeTab == "tab1") {
+        // if($request->activeTab == "tab1") {  
 
         //     try {
 

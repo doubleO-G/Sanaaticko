@@ -23,9 +23,12 @@
         <input type="hidden" name="totalAmountTax" id="totalAmountTax" value="{{ $data->totalAmountTax }}">
         <input type="hidden" name="totalPersTax" id="totalPersTax" value="{{ $data->totalPersTax }}">
         <input type="hidden" name="flutterwave_key" value="{{ \App\Models\PaymentSetting::find(1)->ravePublicKey }}">
-        <input type="hidden" name="email" value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->email : '' }}">
-        <input type="hidden" name="phone" value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->phone : '' }}">
-        <input type="hidden" name="name" value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->name : '' }}">
+        <input type="hidden" name="email"
+            value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->email : '' }}">
+        <input type="hidden" name="phone"
+            value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->phone : '' }}">
+        <input type="hidden" name="name"
+            value="{{ Auth::guard('appuser')->check() ? auth()->guard('appuser')->user()->name : '' }}">
         <input type="hidden" name="flutterwave_key" value="{{ \App\Models\PaymentSetting::find(1)->ravePublicKey }}">
         <div id="ticketorder">
             @csrf
@@ -77,9 +80,11 @@
                                     class="w-full shadow-lg p-5 rounded-lg flex 3xl:flex-nowrap md:flex-wrap xxmd:flex-nowrap sm:flex-wrap msm:flex-wrap xsm:flex-wrap xxsm:flex-wrap bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5">
                                     <img src="{{ asset('images/upload/' . $data->event->image) }}" alt=""
                                         class="rounded-lg w-56 h-56 object-cover">
-                                    <div class="ml-4 2xl:w-[60%] xl:w-[80%] xlg:w-[80%] xmd:w-full xxmd:w-[80%] xxsm:ml-0 lg:ml-4">
+                                    <div
+                                        class="ml-4 2xl:w-[60%] xl:w-[80%] xlg:w-[80%] xmd:w-full xxmd:w-[80%] xxsm:ml-0 lg:ml-4">
 
-                                        <p class="font-poppins font-bold text-4xl leading-8 text-left pt-3 text-black-100 xxsm:text-xl md:text-4xl">
+                                        <p
+                                            class="font-poppins font-bold text-4xl leading-8 text-left pt-3 text-black-100 xxsm:text-xl md:text-4xl">
                                             {{ $data->event->name }}</p>
                                         <p class="font-poppins font-normal text-sm text-gray-200 leading-8 text-left pt-2">
                                             {{ __('Date') }}</p>
@@ -144,7 +149,8 @@
                                                     <span class="m-auto text-2xl font-thin">+</span>
                                                 </button>
                                             </div>
-                                            <div class="font-poppins font-medium text-base leading-7 text-danger" id="quantityMsg"></div>
+                                            <div class="font-poppins font-medium text-base leading-7 text-danger"
+                                                id="quantityMsg"></div>
                                         @endif
                                     </div>
                                 </div>
@@ -159,48 +165,51 @@
                                 <input type="hidden" name="usr_auth" value="{{ Auth::guard('appuser')->check() }}">
 
                                 @if (!Auth::guard('appuser')->check())
-                                <div class="card w-full shadow-lg p-5 rounded-lg  bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5 mt-5">
-                                    <p class="font-poppins font-semibold text-2xl leading-8 text-black">
+                                    <div
+                                        class="card w-full shadow-lg p-5 rounded-lg  bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5 mt-5">
+                                        <p class="font-poppins font-semibold text-2xl leading-8 text-black">
                                             Customer Details</p>
-                                    <div class="card-body mt-2">
-                                        <div>
-                                            <div class="flex border-b border-gray-200" id="tabs">
-                                                <button
-                                                    data-tab="tab1"
-                                                    class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2"
-                                                >
-                                                    Enter your details
-                                                </button>
-                                                {{-- <button
+                                        <div class="card-body mt-2">
+                                            <div>
+                                                <div class="flex border-b border-gray-200" id="tabs">
+                                                    <button data-tab="tab1"
+                                                        class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2">
+                                                        Enter your details
+                                                    </button>
+                                                    {{-- <button
                                                     data-tab="tab2"
                                                     class="tab-button px-4 py-2 text-medium font-medium text-gray-500 focus:outline-none border-b-2"
                                                 >
                                                     New Customer
                                                 </button> --}}
-                                            </div>
+                                                </div>
 
-                                            <div class="mt-4">
-                                                <div id="tab1" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
-                                                    <div class="grid grid-cols-2 gap-5 sm:grid-cols-2 msm:grid-cols-2 xxsm:grid-cols-1">
-                                                        <div class="pt-5">
-                                                            <label for="email"
-                                                                class="text-base font-medium leading-6 text-black font-poppins">{{ __('Email') }}</label>
-                                                            <input type="email" name="usr_login_email" id=""
-                                                                class="z-20 block w-full p-3 text-sm font-normal text-black border rounded-lg font-poppins border-gray-light focus:outline-none"
-                                                                placeholder="{{ __('Your Email') }}">
-                                                        </div>
-                                                        <div class="pt-5 ">
-                                                            <label for="password"
-                                                                class="text-base font-medium leading-6 text-black font-poppins">Phone Number</label>
-                                                            <div class="relative">
-                                                                <input type="number" name="usr_phone" id=""
+                                                <div class="mt-4">
+                                                    <div id="tab1"
+                                                        class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
+                                                        <div
+                                                            class="grid grid-cols-2 gap-5 sm:grid-cols-2 msm:grid-cols-2 xxsm:grid-cols-1">
+                                                            <div class="pt-5">
+                                                                <label for="email"
+                                                                    class="text-base font-medium leading-6 text-black font-poppins">{{ __('Email') }}</label>
+                                                                <input type="email" name="usr_login_email"
+                                                                    id=""
+                                                                    class="z-20 block w-full p-3 text-sm font-normal text-black border rounded-lg font-poppins border-gray-light focus:outline-none"
+                                                                    placeholder="{{ __('Your Email') }}">
+                                                            </div>
+                                                            <div class="pt-5 ">
+                                                                <label for="password"
+                                                                    class="text-base font-medium leading-6 text-black font-poppins">Phone
+                                                                    Number</label>
+                                                                <div class="relative">
+                                                                    <input type="number" name="usr_phone" id=""
                                                                         class="w-full text-sm font-poppins font-normal text-black block p-3 z-20 rounded-md border border-gray-light focus:outline-none"
                                                                         placeholder="{{ __('Number') }}">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {{-- <div id="tab2" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
+                                                    {{-- <div id="tab2" class="tab-content p-4 bg-gray-50 border border-gray-200 rounded hidden">
                                                     <div class="grid grid-cols-2 gap-5 sm:grid-cols-2 msm:grid-cols-2 xxsm:grid-cols-1">
                                                         <div class="pt-5 userInput">
                                                             <label for="name"
@@ -260,23 +269,30 @@
                                                         </div>
                                                     </div>
                                                 </div> --}}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
 
                                 @if ($data->available_qty > 0)
                                     <div
                                         class="w-full shadow-lg p-5 rounded-lg  bg-white xlg:w-full xmd:w-full 3xl:mb-0 xl:mb-0 xlg:mb-5 xxsm:mb-5 mt-5">
                                         @if (!Auth::guard('appuser')->check())
-                                            <div id="alert" class="hidden flex items-center p-4 mb-0 border rounded-lg bg-blue-50 border-blue-300 text-blue-800" role="alert">
-                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-8 3a1 1 0 01-.707-.293l-3-3a1 1 0 111.414-1.414L10 10.586l2.293-2.293a1 1 0 011.414 1.414l-3 3A1 1 0 0110 13zm0-10a7 7 0 100 14 7 7 0 000-14z" clip-rule="evenodd"></path>
+                                            <div id="alert"
+                                                class="hidden flex items-center p-4 mb-0 border rounded-lg bg-blue-50 border-blue-300 text-blue-800"
+                                                role="alert">
+                                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 mr-2"
+                                                    fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-8 3a1 1 0 01-.707-.293l-3-3a1 1 0 111.414-1.414L10 10.586l2.293-2.293a1 1 0 011.414 1.414l-3 3A1 1 0 0110 13zm0-10a7 7 0 100 14 7 7 0 000-14z"
+                                                        clip-rule="evenodd"></path>
                                                 </svg>
                                                 <span class="sr-only">Info</span>
                                                 <div>
-                                                    <span class="font-medium">Info alert!</span> Before choosing your payment method, ensure you provide your account details.
+                                                    <span class="font-medium">Info alert!</span> Before choosing your
+                                                    payment method, ensure you provide your account details.
                                                 </div>
                                             </div>
                                         @endif
@@ -478,35 +494,35 @@
                                         class="font-poppins font-medium text-base leading-6 text-primary focus:outline-none mr-5">{{ __('Apply') }}</button>
                                 </div>
                                 <div class="couponerror"></div>
-                                @if(count($data->tax) >= 1)
-                                <p class="font-poppins font-semibold text-base leading-8 text-black ">
-                                    {{ __('Taxes and Charges') }}</p>
-                                        <div class="taxes  border border-primary rounded-md p-2">
-                                            @foreach ($data->tax as $key => $item)
-                                                <input type="hidden" class="amount_type" name="amount_type"
-                                                    value="{{ $item->amount_type }}">
-                                                <div class="flex justify-between">
-                                                    <p class="font-poppins font-normal text-lg leading-7 text-gray-200 ">
-                                                        {{ $item->name }}
-                                                        @if ($item->amount_type == 'percentage')
-                                                            ({{ $item->price . '%' }})
-                                                        @endif
-                                                    </p>
-                                                    <p class="font-poppins font-medium text-lg leading-7 text-gray-300">
-                                                        @if ($item->amount_type == 'percentage')
-                                                            @php
-                                                                $result = ($data->price * $item->price) / 100;
-                                                                $formattedResult = round($result, 2);
-                                                            @endphp
-                                                            {{ $currency }} {{ $formattedResult }}
-                                                        @else
-                                                            {{ $currency }} {{ $item->price }}
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @endif
+                                @if (count($data->tax) >= 1)
+                                    <p class="font-poppins font-semibold text-base leading-8 text-black ">
+                                        {{ __('Taxes and Charges') }}</p>
+                                    <div class="taxes  border border-primary rounded-md p-2">
+                                        @foreach ($data->tax as $key => $item)
+                                            <input type="hidden" class="amount_type" name="amount_type"
+                                                value="{{ $item->amount_type }}">
+                                            <div class="flex justify-between">
+                                                <p class="font-poppins font-normal text-lg leading-7 text-gray-200 ">
+                                                    {{ $item->name }}
+                                                    @if ($item->amount_type == 'percentage')
+                                                        ({{ $item->price . '%' }})
+                                                    @endif
+                                                </p>
+                                                <p class="font-poppins font-medium text-lg leading-7 text-gray-300">
+                                                    @if ($item->amount_type == 'percentage')
+                                                        @php
+                                                            $result = ($data->price * $item->price) / 100;
+                                                            $formattedResult = round($result, 2);
+                                                        @endphp
+                                                        {{ $currency }} {{ $formattedResult }}
+                                                    @else
+                                                        {{ $currency }} {{ $item->price }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <div class="flex justify-between">
                                     <p class="font-poppins font-normal text-lg leading-7 text-gray-200">
                                         {{ __('Total Tax amount') }}</p>
@@ -552,7 +568,7 @@
 @section('js')
     <script>
         // DATE PICKER
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#onetime").flatpickr({
                 dateFormat: 'Y-m-d',
                 minDate: '{{ $data->event->start_time }}',
