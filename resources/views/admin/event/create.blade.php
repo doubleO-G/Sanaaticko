@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" class="event-form" action="{{ url('events') }}"
+                            <form method="post" class="event-form" action="{{ route('event.store') }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

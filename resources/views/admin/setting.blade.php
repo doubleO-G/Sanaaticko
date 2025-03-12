@@ -830,6 +830,31 @@
                                     <div class="form-group row mb-4">
 
                                         <label
+                                            class="col-form-label text-md-right col-12 col-md-3">{{ __('M-Pesa') }}</label>
+
+                                        <div class="col-sm-12 col-md-9">
+
+                                            <div class="custom-switches-stacked mt-2">
+
+                                                <label class="custom-switch pl-0">
+
+                                                    <input type="checkbox" name="mpesa"
+                                                        {{ $payment->stripe == '1' ? 'checked' : '' }} value="1"
+                                                        class="custom-switch-input paymentCheckbox">
+
+                                                    <span class="custom-switch-indicator"></span>
+
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row mb-4">
+
+                                        <label
                                             class="col-form-label text-md-right col-12 col-md-3">{{ __('Paypal') }}</label>
 
                                         <div class="col-sm-12 col-md-9">

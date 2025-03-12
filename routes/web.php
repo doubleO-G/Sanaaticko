@@ -172,6 +172,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/check-email', [UserController::class, 'check_email']);
     Route::post('/about_us', [SettingController::class, 'aboutUs']);
     Route::get('/event/create', [EventController::class, 'create']);
+
+    Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
+
     Route::get('/app_users_edit/{id}', [UserController::class, 'editAppUser']);
     Route::post('/update_appuser', [UserController::class, 'updateAppUser']);
     Route::get('/organization/income', [UserController::class, 'orgincome']);

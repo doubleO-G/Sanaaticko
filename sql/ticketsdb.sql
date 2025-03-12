@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jan 15, 2025 at 05:37 PM
--- Server version: 9.1.0
+-- Generation Time: Mar 12, 2025 at 08:06 PM
+-- Server version: 9.2.0
 -- PHP Version: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -72,6 +72,14 @@ CREATE TABLE `app_user` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `app_user`
+--
+
+INSERT INTO `app_user` (`id`, `name`, `last_name`, `email`, `remember_token`, `email_verified_at`, `password`, `otp`, `image`, `address`, `phone`, `following`, `favorite`, `favorite_blog`, `lat`, `lang`, `provider`, `provider_token`, `device_token`, `bio`, `language`, `is_verify`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '1741806403', NULL, 'behalf@gmail.com', NULL, NULL, '$2y$10$kTLU/mhbQSXybffDGrG4H.uoGtMk/aNb3Dt/RcyExE6Kj/1KPLIku', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCAL', NULL, NULL, NULL, NULL, 1, 1, '2025-03-12 19:06:43', '2025-03-12 19:06:43', NULL),
+(2, 'hellen', 'hellin', 'helen@gmail.com', NULL, NULL, '$2y$10$QeGmz7Q97Yg7M1XG96MkBuS0mhInh9rbr8taUsgplxuMhimSfziHi', NULL, 'defaultuser.png', NULL, '+2547712676756', NULL, NULL, NULL, NULL, NULL, 'LOCAL', NULL, NULL, NULL, 'English', 1, 1, '2025-03-12 19:12:13', '2025-03-12 19:12:13', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -97,10 +105,10 @@ CREATE TABLE `banner` (
 CREATE TABLE `blog` (
   `id` int NOT NULL,
   `category_id` int NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tags` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tags` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int NOT NULL DEFAULT '1',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -156,7 +164,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'MoneyFest', '6787ea8ba13a8.jpg', 1, '2025-01-15 17:04:11', '2025-01-15 17:04:11');
+(1, 'MoneyFest Category', '6787ea8ba13a8.jpg', 1, '2025-01-15 17:04:11', '2025-03-12 18:19:18');
 
 -- --------------------------------------------------------
 
@@ -617,30 +625,37 @@ INSERT INTO `currency` (`id`, `country`, `currency`, `code`, `symbol`) VALUES
 
 CREATE TABLE `events` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `user_id` int NOT NULL,
-  `scanner_id` text COLLATE utf8mb4_unicode_ci,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scanner_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` int NOT NULL,
-  `start_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `end_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gallery` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `start_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `end_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gallery` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `people` int DEFAULT NULL,
-  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `group` text COLLATE utf8mb4_unicode_ci,
+  `lat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `group` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `security` int NOT NULL DEFAULT '1',
-  `tags` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tags` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int NOT NULL DEFAULT '1',
-  `event_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
+  `event_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `is_deleted` int NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `name`, `type`, `url`, `user_id`, `scanner_id`, `address`, `category_id`, `start_time`, `end_time`, `image`, `gallery`, `people`, `lat`, `lang`, `description`, `group`, `security`, `tags`, `status`, `event_status`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, 'febfvsefv', 'online', 'vrvearr.com', 2, NULL, NULL, 1, '2025-03-27 12:00:00', '2025-03-28 12:00:00', '67d1d8988813f.png', '67d1dab0d560f.,67d1dab0df42c.', 4440, NULL, NULL, 'vdvrevf efeq ervqeq ec2f f2f3', NULL, 1, 'vavav', 1, 'Pending', 0, '2025-03-12 18:55:20', '2025-03-12 19:04:16');
 
 -- --------------------------------------------------------
 
@@ -921,7 +936,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 
 CREATE TABLE `module` (
   `id` int NOT NULL,
-  `module` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `module` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `is_enable` tinyint NOT NULL DEFAULT '0',
   `is_install` tinyint NOT NULL DEFAULT '0',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -953,6 +968,16 @@ CREATE TABLE `notification` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`id`, `user_id`, `organizer_id`, `order_id`, `status`, `title`, `message`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, 1, 1, 'Ticket Booked', 'Hi 1741806403 , your 1 ticket booked for event febfvsefv on 27 March 2025 12:00 pm successfully. From EventRight Pro', '2025-03-12 19:06:43', '2025-03-12 19:06:43'),
+(2, NULL, 2, 1, 1, 'New Ticket Booked', 'Hi Barrack Obama, 1741806403  has booked 1 tickets for event febfvsefv on 27 March 2025 12:00 pm successfully. From EventRight Pro', '2025-03-12 19:06:46', '2025-03-12 19:06:46'),
+(3, 2, NULL, 2, 1, 'Ticket Booked', 'Hi hellen hellin, your 2 ticket booked for event febfvsefv on 27 March 2025 12:00 pm successfully. From EventRight Pro', '2025-03-12 19:12:59', '2025-03-12 19:12:59'),
+(4, NULL, 2, 2, 1, 'New Ticket Booked', 'Hi , hellen hellin has booked 2 tickets for event febfvsefv on 27 March 2025 12:00 pm successfully. From EventRight Pro', '2025-03-12 19:13:01', '2025-03-12 19:13:01');
 
 -- --------------------------------------------------------
 
@@ -1105,6 +1130,14 @@ CREATE TABLE `orders` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_id`, `customer_id`, `organization_id`, `event_id`, `checkins_count`, `book_seats`, `seat_details`, `ticket_id`, `coupon_id`, `quantity`, `coupon_discount`, `ticket_date`, `tax`, `org_commission`, `payment`, `payment_type`, `payment_status`, `payment_token`, `order_status`, `org_pay_status`, `created_at`, `updated_at`) VALUES
+(1, '#18002', 1, 2, 1, 0, NULL, NULL, 1, NULL, 1, 0, '2025-03-12 00:00:00', 0, 25, 2500, 'LOCAL', 1, NULL, 'Complete', 0, '2025-03-12 19:06:43', '2025-03-12 19:07:58'),
+(2, '#91029', 2, 2, 1, 0, NULL, NULL, 2, NULL, 2, 0, NULL, 0, 80, 8000, 'LOCAL', 0, NULL, 'Pending', 0, '2025-03-12 19:12:59', '2025-03-12 19:12:59');
+
 -- --------------------------------------------------------
 
 --
@@ -1123,6 +1156,15 @@ CREATE TABLE `order_child` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_child`
+--
+
+INSERT INTO `order_child` (`id`, `ticket_id`, `order_id`, `customer_id`, `ticket_number`, `status`, `checkin`, `paid`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '67d1db432a686', 0, NULL, 0, '2025-03-12 19:06:43', '2025-03-12 19:06:43'),
+(2, 2, 2, 2, '67d1dcbb13f73', 0, NULL, 0, '2025-03-12 19:12:59', '2025-03-12 19:12:59'),
+(3, 2, 2, 2, '67d1dcbb164fa', 0, NULL, 0, '2025-03-12 19:12:59', '2025-03-12 19:12:59');
 
 -- --------------------------------------------------------
 
@@ -1209,7 +1251,7 @@ CREATE TABLE `payment_setting` (
 --
 
 INSERT INTO `payment_setting` (`id`, `wallet`, `stripe`, `cod`, `paypal`, `razor`, `flutterwave`, `stripeSecretKey`, `stripePublicKey`, `paypalClientId`, `paypalSecret`, `razorPublishKey`, `razorSecretKey`, `ravePublicKey`, `raveSecretKey`, `raveWebhookSecretHash`, `flutterDebugMode`, `created_at`, `updated_at`) VALUES
-(1, 0, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-04-18 07:39:49', '2023-04-18 07:39:49');
+(1, 1, 0, 1, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-04-18 07:39:49', '2025-03-12 19:20:45');
 
 -- --------------------------------------------------------
 
@@ -1430,6 +1472,14 @@ CREATE TABLE `tickets` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `event_id`, `user_id`, `ticket_number`, `name`, `type`, `allday`, `maximum_checkins`, `quantity`, `ticket_per_order`, `start_time`, `end_time`, `price`, `description`, `status`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'TT-1684', 'Advance', 'paid', 1, NULL, 100, 5, '2025-03-12 12:00:00', '2025-03-15 12:00:00', 2500, 'Early Bird Tickets', 1, 0, '2025-03-12 19:00:02', '2025-03-12 19:00:02'),
+(2, 1, 2, 'MG-5422', 'Gate', 'paid', 1, NULL, 100, 5, '2025-03-12 12:00:00', '2025-03-15 12:00:00', 4000, 'At the gate tickets.', 1, 0, '2025-03-12 19:00:58', '2025-03-12 19:00:58');
 
 -- --------------------------------------------------------
 
@@ -2019,7 +2069,7 @@ CREATE TABLE `transactions` (
   `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -2103,7 +2153,7 @@ CREATE TABLE `wallets` (
   `decimal_places` smallint UNSIGNED NOT NULL DEFAULT '2',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indexes for dumped tables
@@ -2435,7 +2485,7 @@ ALTER TABLE `admin_contact`
 -- AUTO_INCREMENT for table `app_user`
 --
 ALTER TABLE `app_user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `banner`
@@ -2489,7 +2539,7 @@ ALTER TABLE `currency`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `event_faqs`
@@ -2549,7 +2599,7 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `notification_template`
@@ -2573,13 +2623,13 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_child`
 --
 ALTER TABLE `order_child`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_tax`
@@ -2633,7 +2683,7 @@ ALTER TABLE `tax`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transactions`
