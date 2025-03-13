@@ -24,6 +24,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\MpesaController;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -175,6 +176,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
 
+
+    
+
+
     Route::get('/app_users_edit/{id}', [UserController::class, 'editAppUser']);
     Route::post('/update_appuser', [UserController::class, 'updateAppUser']);
     Route::get('/organization/income', [UserController::class, 'orgincome']);
@@ -217,3 +222,7 @@ Route::get('/rave/callback/{id}', [UserController::class, 'callback'])->name('ca
 
 Route::get('FlutterWavepayment/{id}', [UserController::class, 'FlutterWavepayment']);
 Route::get('transction_verify/{id}', [UserController::class, 'transction_verify']);
+
+// mpesa routes
+Route::post('/mpesa/stkpush', [MpesaController::class, 'stkPush']);
+Route::get('/mpesa/token', [MpesaController::class, 'getAccessToken']);

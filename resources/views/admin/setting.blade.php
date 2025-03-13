@@ -827,6 +827,7 @@
 
                                     </div>
 
+                                    <!-- mpesa starts here -->
                                     <div class="form-group row mb-4">
 
                                         <label
@@ -851,6 +852,7 @@
                                         </div>
 
                                     </div>
+                                     <!-- mpesa ends here -->
 
                                     <div class="form-group row mb-4">
 
