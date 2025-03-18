@@ -1,0 +1,43 @@
+curl -X POST http://localhost:8547/mpesa/stkpush   -H "Content-Type: application/json"   -d '{
+    "Amount": 1,
+    "PartyA": 254719516641,
+    "PartyB": 174379,
+    "PhoneNumber": 254719516641,
+    "CallBackURL": "https://your-callback-url.com",
+    "AccountReference": "CompanyXLTD",
+    "TransactionDesc": "Payment of X"
+}'
+
+
+this calls the mpesa push to pay stk method in mpesacontroller.
+
+
+the data in the -d part is not being consumed in the controller, 
+the one in the controller is being consumed
+
+
+in the controller it would happen like;
+
+public function stkPush(Request $request)
+{
+    // Accessing the data from the incoming request (sent from cURL)
+    $amount = $request->input('Amount');  // 100
+    $partyA = $request->input('PartyA');  // 254708374149
+    $partyB = $request->input('PartyB');  // 174379
+    $phoneNumber = $request->input('PhoneNumber');  // 254708374149
+    $callBackUrl = $request->input('CallBackURL');  // "https://your-callback-url.com"
+    $accountReference = $request->input('AccountReference');  // "CompanyXLTD"
+    $transactionDesc = $request->input('TransactionDesc');  // "Payment for Goods"
+
+    // Process the data...
+    return response()->json([
+        'Amount' => $amount,
+        'PartyA' => $partyA,
+        'TransactionDesc' => $transactionDesc
+    ]);
+}
+
+php cURL version in public/tets.php
+
+
+come back work on the callback url...

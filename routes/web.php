@@ -225,4 +225,4 @@ Route::get('transction_verify/{id}', [UserController::class, 'transction_verify'
 
 // mpesa routes
 Route::post('/mpesa/stkpush', [MpesaController::class, 'stkPush']);
-Route::get('/mpesa/token', [MpesaController::class, 'getAccessToken']);
+Route::get('/mpesa/token', [MpesaController::class, 'getAccessToken']); //private function

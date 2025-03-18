@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 $ch = curl_init('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer uvrU5HwU1U8ORdVcY0DWCHHJgPgb',
+    'Authorization: Bearer cGQt6GD90qkZx2h9ACYegAExSarO',
     'Content-Type: application/json'
 ]);
 curl_setopt($ch, CURLOPT_POST, 1);

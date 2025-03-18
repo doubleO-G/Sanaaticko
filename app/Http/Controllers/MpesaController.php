@@ -22,6 +22,8 @@ class MpesaController extends Controller
 
         // Encode credentials as Base64
         $credentials = base64_encode("$consumerKey:$consumerSecret");
+        // or this concatenate
+        // $credentials = base64_encode($consumerKey . ':' . $consumerSecret);
 
         // Send the request to Safaricom to retrieve the access token
         $response = Http::withHeaders([
@@ -46,23 +48,36 @@ class MpesaController extends Controller
         $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
         // API credentials
+        $phone_number = '254719516641'; 
+        $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
         $shortcode = '174379';  // Business short code
-        $password = 'MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjUwMzEzMTYyNDU0';  // Password for API
-        $accessToken = '1A9gG9GFxbPscnR9GGkP7AXUZAXi';  // Bearer Token for authorization (this should be securely retrieved)
+        $accessToken = $this->getAccessToken();  // Access token from the private function
+
+        if (!$accessToken) {
+            return response()->json([
+                'message' => 'Failed to get access token'
+            ], 500);
+        }
+
+        // Prepare the request payload
+        $timestamp = now()->format('YmdHis');  // Current timestamp in the required format
+
+        // Generate the password (Base64 encoded string)
+        $password = base64_encode($shortcode . $passkey . $timestamp);
 
         // Prepare the request payload
         $data = [
             "BusinessShortCode" => $shortcode,
             "Password" => $password,
-            "Timestamp" => now()->format('YmdHis'),  // Current timestamp in the required format
+            "Timestamp" => $timestamp,  // Current timestamp in the required format
             "TransactionType" => "CustomerPayBillOnline",  // Transaction type
             "Amount" => 1,  // Payment amount
-            "PartyA" => 254708374149,  // Phone number of the payer
+            "PartyA" => $phone_number,  // Phone number of the payer
             "PartyB" => $shortcode,  // Business short code
-            "PhoneNumber" => 254708374149,  // Phone number of the payer
+            "PhoneNumber" => $phone_number,  // Phone number of the payer
             "CallBackURL" => "https://mydomain.com/path",  // Your callback URL
-            "AccountReference" => "CompanyXLTD",  // Account reference
-            "TransactionDesc" => "Payment of X"  // Description of the transaction
+            "AccountReference" => "pushtolipa",  // Account reference or account number to be shown on push msg
+            "TransactionDesc" => "from base"  // Description of the transaction
         ];
 
         // Make the HTTP POST request to the STK Push API

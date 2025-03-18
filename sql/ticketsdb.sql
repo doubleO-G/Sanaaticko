@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 13, 2025 at 05:05 PM
+-- Generation Time: Mar 18, 2025 at 05:36 AM
 -- Server version: 9.2.0
 -- PHP Version: 8.2.27
 
@@ -655,7 +655,8 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `name`, `type`, `url`, `user_id`, `scanner_id`, `address`, `category_id`, `start_time`, `end_time`, `image`, `gallery`, `people`, `lat`, `lang`, `description`, `group`, `security`, `tags`, `status`, `event_status`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'febfvsefv', 'online', 'vrvearr.com', 2, NULL, NULL, 1, '2025-03-27 12:00:00', '2025-03-28 12:00:00', '67d1d8988813f.png', '67d1dab0d560f.,67d1dab0df42c.', 4440, NULL, NULL, 'vdvrevf efeq ervqeq ec2f f2f3', NULL, 1, 'vavav', 1, 'Pending', 0, '2025-03-12 18:55:20', '2025-03-12 19:04:16');
+(1, 'febfvsefv', 'online', 'vrvearr.com', 2, NULL, NULL, 1, '2025-03-27 12:00:00', '2025-03-28 12:00:00', '67d1d8988813f.png', '67d1dab0d560f.,67d1dab0df42c.', 4440, NULL, NULL, 'vdvrevf efeq ervqeq ec2f f2f3', NULL, 1, 'vavav', 1, 'Pending', 0, '2025-03-12 18:55:20', '2025-03-12 19:04:16'),
+(2, 'Ribbon Event', 'online', 'www.ribbon.com', 2, NULL, NULL, 1, '2025-04-01 12:00:00', '2025-04-01 17:00:00', '67d8f69ff3b88.png', NULL, 500, NULL, NULL, 'A spectcula ribbon event.<br>', NULL, 1, 'ribbon', 1, 'Pending', 0, '2025-03-18 04:29:20', '2025-03-18 04:29:20');
 
 -- --------------------------------------------------------
 
@@ -1479,7 +1480,9 @@ CREATE TABLE `tickets` (
 
 INSERT INTO `tickets` (`id`, `event_id`, `user_id`, `ticket_number`, `name`, `type`, `allday`, `maximum_checkins`, `quantity`, `ticket_per_order`, `start_time`, `end_time`, `price`, `description`, `status`, `is_deleted`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, 'TT-1684', 'Advance', 'paid', 1, NULL, 100, 5, '2025-03-12 12:00:00', '2025-03-15 12:00:00', 2500, 'Early Bird Tickets', 1, 0, '2025-03-12 19:00:02', '2025-03-12 19:00:02'),
-(2, 1, 2, 'MG-5422', 'Gate', 'paid', 1, NULL, 100, 5, '2025-03-12 12:00:00', '2025-03-15 12:00:00', 4000, 'At the gate tickets.', 1, 0, '2025-03-12 19:00:58', '2025-03-12 19:00:58');
+(2, 1, 2, 'MG-5422', 'Gate', 'paid', 1, NULL, 100, 5, '2025-03-12 12:00:00', '2025-03-15 12:00:00', 4000, 'At the gate tickets.', 1, 0, '2025-03-12 19:00:58', '2025-03-12 19:00:58'),
+(3, 2, 2, 'UN-5464', 'Early Bird', 'paid', 1, NULL, 100, 5, '2025-03-18 04:00:00', '2025-03-31 12:00:00', 1500, 'Early bird tickets, worm catcher', 1, 0, '2025-03-18 04:31:18', '2025-03-18 04:35:32'),
+(4, 2, 2, 'IV-1234', 'Gate Entrance', 'paid', 1, NULL, 200, 5, '2025-03-18 04:00:00', '2025-03-31 12:00:00', 2000, 'At the gate', 1, 0, '2025-03-18 04:35:11', '2025-03-18 04:35:11');
 
 -- --------------------------------------------------------
 
@@ -2539,7 +2542,7 @@ ALTER TABLE `currency`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `event_faqs`
@@ -2683,7 +2686,7 @@ ALTER TABLE `tax`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transactions`
