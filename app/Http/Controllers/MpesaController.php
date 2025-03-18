@@ -51,7 +51,7 @@ class MpesaController extends Controller
         $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
         // API credentials
-        $phone_number = '254719516641'; 
+        $phone_number;
         $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
         $shortcode = '174379';  // Business short code
         $accessToken = $this->getAccessToken();  // Access token from the private function
@@ -79,7 +79,7 @@ class MpesaController extends Controller
             "PartyB" => $shortcode,  // Business short code
             "PhoneNumber" => $phone_number,  // Phone number of the payer
             "CallBackURL" => "https://truelightproperties.co.ke/testaroo/callback.php",  // Your callback URL
-            "AccountReference" => "pushtolipa",  // Account reference or account number to be shown on push msg
+            "AccountReference" => "sirgetesting",  // Account reference or account number to be shown on push msg
             "TransactionDesc" => "from base"  // Description of the transaction
         ];
 
