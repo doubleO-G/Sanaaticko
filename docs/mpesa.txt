@@ -3,7 +3,7 @@ curl -X POST http://localhost:8547/mpesa/stkpush   -H "Content-Type: application
     "PartyA": 254719516641,
     "PartyB": 174379,
     "PhoneNumber": 254719516641,
-    "CallBackURL": "https://your-callback-url.com",
+    "CallBackURL": "https://truelightproperties.co.ke/testaroo/callback.php",
     "AccountReference": "CompanyXLTD",
     "TransactionDesc": "Payment of X"
 }'
@@ -40,4 +40,6 @@ public function stkPush(Request $request)
 php cURL version in public/tets.php
 
 
-come back work on the callback url...
+callback url...
+test the laravel callback link online on live. 
+php script works...at public/callback.php

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Log;
+
+
 
 class MpesaController extends Controller
 {
@@ -75,7 +78,7 @@ class MpesaController extends Controller
             "PartyA" => $phone_number,  // Phone number of the payer
             "PartyB" => $shortcode,  // Business short code
             "PhoneNumber" => $phone_number,  // Phone number of the payer
-            "CallBackURL" => "https://mydomain.com/path",  // Your callback URL
+            "CallBackURL" => "https://truelightproperties.co.ke/testaroo/callback.php",  // Your callback URL
             "AccountReference" => "pushtolipa",  // Account reference or account number to be shown on push msg
             "TransactionDesc" => "from base"  // Description of the transaction
         ];
@@ -101,4 +104,66 @@ class MpesaController extends Controller
             ], $response->status());
         }
     }
+
+    public function handleCallback(Request $request)
+    {
+        // Dump the callback data for debugging
+        // You may remove this after verifying the data structure
+        Log::info('M-Pesa Callback Data: ', $request->all());
+
+        // Extract relevant information from the request
+        $callbackData = $request->all();
+
+        // For example, Safaricom will send a `Body` key with details:
+        if (isset($callbackData['Body'])) {
+            $body = $callbackData['Body'];
+
+            // Extract the transaction details from the body
+            $stkCallback = $body['stkCallback'];
+
+            // Handle success or failure based on the `ResultCode`
+            $resultCode = $stkCallback['ResultCode'];
+            $resultDesc = $stkCallback['ResultDesc'];
+
+            if ($resultCode == 0) {
+                // Success: Payment was successful
+                $amount = $stkCallback['CallbackMetadata']['Item'][0]['Value'];
+                $mpesaReceiptNumber = $stkCallback['CallbackMetadata']['Item'][1]['Value'];
+                $transactionDate = $stkCallback['CallbackMetadata']['Item'][3]['Value'];
+
+                // You can now save the transaction to the database or process it
+                // For example, store it in the database:
+                // Transaction::create([
+                //     'amount' => $amount,
+                //     'mpesa_receipt_number' => $mpesaReceiptNumber,
+                //     'transaction_date' => $transactionDate,
+                //     'status' => 'success',
+                // ]);
+
+                return response()->json([
+                    'message' => 'Payment successful',
+                    'data' => [
+                        'Amount' => $amount,
+                        'MpesaReceiptNumber' => $mpesaReceiptNumber,
+                        'TransactionDate' => $transactionDate,
+                    ]
+                ]);
+            } else {
+                // Failure: Payment failed
+                return response()->json([
+                    'message' => 'Payment failed',
+                    'error' => $resultDesc
+                ]);
+            }
+        } else {
+            // If the callback data is not in the expected format
+            return response()->json([
+                'message' => 'Invalid callback data format',
+                'error' => $callbackData
+            ], 400);
+        }
+    }
+
+
+
 }
