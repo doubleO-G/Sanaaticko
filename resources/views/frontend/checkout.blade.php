@@ -340,9 +340,8 @@
                                                          <input id="Paystack" required type="radio" value="PAYSTACK"
                                                              name="payment_type"
                                                              class="h-5 w-5 mr-2 border border-gray-light  hover:border-gray-light focus:outline-none">
-                                                             <input type="hidden" name="paystack_key" value="{{ env('PAYSTACK_PUBLIC_KEY') }}">
-
-                                                         <label for="paystack"><img
+                                                             <input type="hidden" name="paystack_key" value="{{ \App\Models\PaymentSetting::find(1)->paystackPublicKey ?? '' }}">
+                                                            <label for="paystack"><img
                                                                  src="{{ url('images/payments/paystack.svg') }}"
                                                                  alt="" class="object-contain"></label>
                                                      </div>
