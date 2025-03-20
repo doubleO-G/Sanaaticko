@@ -185,7 +185,7 @@ $(document).ready(function () {
                         );
                         $(".discount").text(
                             currency +
-                                parseFloat(result.payableamount).toFixed(2)
+                            parseFloat(result.payableamount).toFixed(2)
                         );
                         $("#coupon_discount").val(
                             parseFloat(result.discount).toFixed(2)
@@ -201,8 +201,8 @@ $(document).ready(function () {
                     if (result.success == false) {
                         $(".couponerror").html(
                             '<div class="text-danger ml-2" >' +
-                                result.message +
-                                "</div>"
+                            result.message +
+                            "</div>"
                         );
                     }
                 },
@@ -335,52 +335,52 @@ $(document).ready(function () {
                     );
                     $(".single-order-top").append(
                         '<p class="text-light mb-0">' +
-                            result.data.order_id +
-                            "</p><h4>Booked on :" +
-                            " " +
-                            result.data.time +
-                            '</h4> <span class="badge ' +
-                            status +
-                            '">' +
-                            result.data.order_status +
-                            "</span>" +
-                            rating +
-                            '<div class="" id="mycustomqrcode"></div>' +
-                            '<div class="row mt-2"><div class="col-lg-2"><img class="w-100" src="' +
-                            base_url +
-                            "/images/upload/" +
-                            result.data.event.image +
-                            '">\
+                        result.data.order_id +
+                        "</p><h4>Booked on :" +
+                        " " +
+                        result.data.time +
+                        '</h4> <span class="badge ' +
+                        status +
+                        '">' +
+                        result.data.order_status +
+                        "</span>" +
+                        rating +
+                        '<div class="" id="mycustomqrcode"></div>' +
+                        '<div class="row mt-2"><div class="col-lg-2"><img class="w-100" src="' +
+                        base_url +
+                        "/images/upload/" +
+                        result.data.event.image +
+                        '">\
 					</div><div class="col-5"><h6 class="mb-0">' +
-                            result.data.event.name +
-                            '</h6><p class="mb-0">By: ' +
-                            result.data.organization.first_name +
-                            " " +
-                            result.data.organization.last_name +
-                            '</p><p class="mb-0">' +
-                            result.data.start_time +
-                            ' to </p><p class="mb-0">' +
-                            result.data.end_time +
-                            '</p><p class="mb-0">' +
-                            type +
-                            '</p></div><div class="col-5 "> <div class="right-data text-center"><div><button class="btn" onclick="viewPayment()"><i class="fa fa-credit-card"></i></button><p>Payment</p></div>' +
-                            review_content +
-                            '<div>\
+                        result.data.event.name +
+                        '</h6><p class="mb-0">By: ' +
+                        result.data.organization.first_name +
+                        " " +
+                        result.data.organization.last_name +
+                        '</p><p class="mb-0">' +
+                        result.data.start_time +
+                        ' to </p><p class="mb-0">' +
+                        result.data.end_time +
+                        '</p><p class="mb-0">' +
+                        type +
+                        '</p></div><div class="col-5 "> <div class="right-data text-center"><div><button class="btn" onclick="viewPayment()"><i class="fa fa-credit-card"></i></button><p>Payment</p></div>' +
+                        review_content +
+                        '<div>\
 					<a class="btn" target="_blank" href="' +
-                            base_url +
-                            "/order-invoice-print/" +
-                            result.data.id +
-                            '"><i class="fa fa-print"></i></a><p>Print</p></div><div><a href="show-details/' +
-                            result.data.id +
-                            '" target="_blank" class="btn" > <i class="fa fa-ticket"></i> <p>Show</p></a></div> </div><div class="payment-data hide" ><p class="mb-0"><span>Payment Method : </span>' +
-                            result.data.payment_type +
-                            '</p><p class="mb-1"><span>Payment Token : </span>' +
-                            payment_token +
-                            '</p><span class="badge ' +
-                            payment_status_class +
-                            '">' +
-                            payment_status +
-                            "</span>  </div>  </div></div>"
+                        base_url +
+                        "/order-invoice-print/" +
+                        result.data.id +
+                        '"><i class="fa fa-print"></i></a><p>Print</p></div><div><a href="show-details/' +
+                        result.data.id +
+                        '" target="_blank" class="btn" > <i class="fa fa-ticket"></i> <p>Show</p></a></div> </div><div class="payment-data hide" ><p class="mb-0"><span>Payment Method : </span>' +
+                        result.data.payment_type +
+                        '</p><p class="mb-1"><span>Payment Token : </span>' +
+                        payment_token +
+                        '</p><span class="badge ' +
+                        payment_status_class +
+                        '">' +
+                        payment_status +
+                        "</span>  </div>  </div></div>"
                     );
 
                     // var qrcode = new QRCode(document.getElementById("mycustomqrcode"), result.data.order_id);
@@ -388,59 +388,59 @@ $(document).ready(function () {
                     if (result.data.ticket.type == "free") {
                         $(".order-bottom").append(
                             '<div class="order-ticket-detail mb-4"><div><p>' +
-                                result.data.ticket.name +
-                                "</p></div><div> " +
-                                result.data.quantity +
-                                ' tickets</div></div><div class="order-total"> <p>Ticket Price</p><p> FREE</p></div><div class="order-total"> <p>Coupon discount</p><p> 0.00</p></div><div class="order-total"><p>Tax</p><p> 0.00</p></div><div class="order-total"> <h6>Total</h6><h6>FREE</h6></div>'
+                            result.data.ticket.name +
+                            "</p></div><div> " +
+                            result.data.quantity +
+                            ' tickets</div></div><div class="order-total"> <p>Ticket Price</p><p> FREE</p></div><div class="order-total"> <p>Coupon discount</p><p> 0.00</p></div><div class="order-total"><p>Tax</p><p> 0.00</p></div><div class="order-total"> <h6>Total</h6><h6>FREE</h6></div>'
                         );
                     } else {
                         $(".order-bottom").append(
                             '<div class="order-ticket-detail mb-4"><div><p>' +
-                                result.data.ticket.name +
-                                "</p></div><div> " +
-                                result.data.quantity +
-                                " X " +
-                                cur +
-                                result.data.ticket.price +
-                                '</div></div> <div class="taxes"></div> <div class="order-total"><p>Tax</p><p>(+) ' +
-                                cur +
-                                result.data.tax +
-                                '</p></div> <div class="order-total"> <p>Ticket Price</p><p> ' +
-                                cur +
-                                result.data.ticket.price *
-                                    result.data.quantity +
-                                '</p></div><div class="order-total"> <p>Coupon discount</p><p>(-) ' +
-                                cur +
-                                result.data.coupon_discount +
-                                '</p></div><div class="order-total"> <h6>Total</h6><h6>' +
-                                cur +
-                                result.data.payment +
-                                "</h6></div>"
+                            result.data.ticket.name +
+                            "</p></div><div> " +
+                            result.data.quantity +
+                            " X " +
+                            cur +
+                            result.data.ticket.price +
+                            '</div></div> <div class="taxes"></div> <div class="order-total"><p>Tax</p><p>(+) ' +
+                            cur +
+                            result.data.tax +
+                            '</p></div> <div class="order-total"> <p>Ticket Price</p><p> ' +
+                            cur +
+                            result.data.ticket.price *
+                            result.data.quantity +
+                            '</p></div><div class="order-total"> <p>Coupon discount</p><p>(-) ' +
+                            cur +
+                            result.data.coupon_discount +
+                            '</p></div><div class="order-total"> <h6>Total</h6><h6>' +
+                            cur +
+                            result.data.payment +
+                            "</h6></div>"
                         );
                     }
                     result.data.maintax.forEach((element) => {
                         if (element.amount_type == "price") {
                             $(".taxes").append(
                                 '<div class="order-total"><p>' +
-                                    element.name +
-                                    "</p><p>" +
-                                    element.price +
-                                    "</p></div>"
+                                element.name +
+                                "</p><p>" +
+                                element.price +
+                                "</p></div>"
                             );
                         }
                         if (element.amount_type == "percentage") {
                             $(".taxes").append(
                                 '<div class="order-total"><p>' +
-                                    element.name +
-                                    "&nbsp; &nbsp;( " +
-                                    element.price +
-                                    "% )" +
-                                    "</p><p >" +
-                                    (result.data.ticket.price *
-                                        result.data.quantity *
-                                        element.price) /
-                                        100 +
-                                    "</p></div>"
+                                element.name +
+                                "&nbsp; &nbsp;( " +
+                                element.price +
+                                "% )" +
+                                "</p><p >" +
+                                (result.data.ticket.price *
+                                    result.data.quantity *
+                                    element.price) /
+                                100 +
+                                "</p></div>"
                             );
                         }
                     });
@@ -455,8 +455,8 @@ $(document).ready(function () {
                         }
                         $(".single-order-top .order-rate").append(
                             '<span class="ml-3 text-white">' +
-                                result.data.review.message +
-                                "</span>"
+                            result.data.review.message +
+                            "</span>"
                         );
                     }
                 }
@@ -483,7 +483,7 @@ $(document).ready(function () {
     });
 
     var usr_countrycode;
-    $(document).on('change', '.usr_countrycode', function() {
+    $(document).on('change', '.usr_countrycode', function () {
         usr_countrycode = $("#usr_countrycode option:selected").val()
     });
 
@@ -499,6 +499,9 @@ $(document).ready(function () {
             );
             var paypalRadio = document.querySelector(
                 '.payments input[type=radio][name="payment_type"][value="PAYPAL"]'
+            );
+            var paystackRadio = document.querySelector(
+                '.payments input[type=radio][name="payment_type"][value="PAYSTACK"]'
             );
             var razorRadio = document.querySelector(
                 '.payments input[type=radio][name="payment_type"][value="RAZOR"]'
@@ -546,7 +549,9 @@ $(document).ready(function () {
                 );
             } else if (stripeRadio && stripeRadio.checked) {
                 stripeSession();
-            } else if (paypalRadio && paypalRadio.checked) {
+            }
+
+            else if (paypalRadio && paypalRadio.checked) {
                 $(".ticket_date").html("");
                 $("#stripeform").hide();
                 $("#form_submit").attr("disabled", true);
@@ -571,22 +576,22 @@ $(document).ready(function () {
             } else if (flutterRadio && flutterRadio.checked) {
 
                 var _requestData = {
-                        payment: $("#payment").val(),
-                        payment_token: null,
-                        payment_type: "FLUTTERWAVE",
-                        ticket_id: $("#ticket_id").val(),
-                        coupon_code: $("#coupon_id").val(),
-                        tax: $("#tax_total").val(),
-                        quantity: $("#quantity").val(),
-                        ticket_date: $("#onetime").val(),
-                        selectedSeats: $("#selectedSeats").val(),
-                        selectedSeatsId: $("#selectedSeatsId").val(),
-                        payment_status: 0,
-                        payment_for: "ticket",
-                        platform: "eventrightpro",
-                    };
+                    payment: $("#payment").val(),
+                    payment_token: null,
+                    payment_type: "FLUTTERWAVE",
+                    ticket_id: $("#ticket_id").val(),
+                    coupon_code: $("#coupon_id").val(),
+                    tax: $("#tax_total").val(),
+                    quantity: $("#quantity").val(),
+                    ticket_date: $("#onetime").val(),
+                    selectedSeats: $("#selectedSeats").val(),
+                    selectedSeatsId: $("#selectedSeatsId").val(),
+                    payment_status: 0,
+                    payment_for: "ticket",
+                    platform: "eventrightpro",
+                };
 
-                if(parseInt(usr_auth) != 1 && usr_auth != '1') {
+                if (parseInt(usr_auth) != 1 && usr_auth != '1') {
 
                     var formData = {
                         first_name: usr_first_name,
@@ -600,21 +605,21 @@ $(document).ready(function () {
                         activeTab: savedTab,
                     };
 
-                    if(savedTab == "tab1") {
-                        if(!usr_login_email || !usr_login_password) {
+                    if (savedTab == "tab1") {
+                        if (!usr_login_email || !usr_login_password) {
                             alert("Ensure all the details are provided")
                             return
                         }
-                    }else {
-                        if(usr_email == "" || usr_password == "" || usr_first_name == "" || usr_last_name == "" || usr_countrycode == "" || usr_phone == "") {
+                    } else {
+                        if (usr_email == "" || usr_password == "" || usr_first_name == "" || usr_last_name == "" || usr_countrycode == "" || usr_phone == "") {
                             alert("Ensure all the details are provided")
                             return
                         }
                     }
 
-                    createaccountthenorder(formData,_requestData);
+                    createaccountthenorder(formData, _requestData);
 
-                }else {
+                } else {
 
                     FlutterwaveCheckout({
                         public_key: $("input[name=flutterwave_key]").val(),
@@ -628,7 +633,7 @@ $(document).ready(function () {
                             phone_number: $("input[name=phone]").val(),
                             name: $("input[name=name]").val(),
                         },
-                        meta:_requestData,
+                        meta: _requestData,
                         callback: function (data) {
                             if (data.status == "successful") {
                                 window.location.href = "/my-tickets";
@@ -644,6 +649,133 @@ $(document).ready(function () {
                             description: "Ticket Payment",
                         },
                     });
+
+                }
+
+            } else if (paystackRadio && paystackRadio.checked) {
+
+                console.log('Paystack Clicked');
+
+                var _requestData = {
+                    payment: $("#payment").val(),
+                    payment_token: null,
+                    payment_type: "PAYSTACK",
+                    ticket_id: $("#ticket_id").val(),
+                    coupon_code: $("#coupon_id").val(),
+                    tax: $("#tax_total").val(),
+                    quantity: $("#quantity").val(),
+                    ticket_date: $("#onetime").val(),
+                    selectedSeats: $("#selectedSeats").val(),
+                    selectedSeatsId: $("#selectedSeatsId").val(),
+                    payment_status: 0,
+                    payment_for: "ticket",
+                    platform: "eventrightpro",
+                };
+
+                if (parseInt(usr_auth) != 1 && usr_auth != '1') {
+
+                    var formData = {
+                        first_name: usr_first_name,
+                        last_name: usr_last_name,
+                        phone: usr_phone,
+                        countrycode: usr_countrycode,
+                        email_login: usr_login_email,
+                        email: usr_email,
+                        password_login: usr_login_password,
+                        password: usr_password,
+                        activeTab: savedTab,
+                    };
+
+                    if (savedTab == "tab1") {
+                        if (!usr_login_email || !usr_login_password) {
+                            alert("Ensure all the details are provided")
+                            return
+                        }
+                    } else {
+                        if (usr_email == "" || usr_password == "" || usr_first_name == "" || usr_last_name == "" || usr_countrycode == "" || usr_phone == "") {
+                            alert("Ensure all the details are provided")
+                            return
+                        }
+                    }
+
+                    createaccountthenorder(formData, _requestData);
+
+                } else {
+                    const amountKES = $("#payment").val(); // USD amount
+                    var handler = PaystackPop.setup({
+                        key: $("input[name=paystack_key]").val(), // Paystack public key
+                        email: $("input[name=email]").val(),
+                        amount: Math.round(amountKES) * 100, // Convert to cents (kobo equivalent)
+                        currency: "KES", // Set Kenyan Shilling
+                        ref: "TX" + Math.floor(Math.random() * 1000000000 + 1), // Generate transaction reference
+                        callback: function (response) {
+                            if (response.status == "success") {
+
+                                var requestData = {
+                                    payment: $("#payment").val(),
+                                    payment_token: response.reference,
+                                    payment_type: "PAYSTACK",
+                                    ticket_id: $("#ticket_id").val(),
+                                    coupon_code: $("#coupon_id").val(),
+                                    tax: $("#tax_total").val(),
+                                    quantity: $("#quantity").val(),
+                                    ticket_date: $("#onetime").val(),
+                                    selectedSeats:
+                                        $("#selectedSeats").val(),
+                                    selectedSeatsId:
+                                        $("#selectedSeatsId").val(),
+                                };
+                                console.log(requestData);
+
+
+                                $.ajax({
+                                    headers: {
+                                        "X-CSRF-TOKEN": $(
+                                            'meta[name="csrf-token"]'
+                                        ).attr("content"),
+                                    },
+                                    url: "/createOrder",
+                                    type: "POST",
+                                    data: requestData,
+
+                                    success: function (data) {
+                                        if (data.success == true) {
+                                            window.location.href =
+                                                "/my-tickets";
+                                        } else {
+                                            $("#stripe_message").text(
+                                                data.message
+                                            );
+                                            $("#stripe_message").show();
+                                        }
+                                    },
+                                    error: function (data) {
+                                        if (data.status === 422) {
+                                            var errors =
+                                                data.responseJSON.errors;
+                                            console.log(
+                                                errors.ticket_date[0]
+                                            );
+                                            $(".ticket_date").text(
+                                                errors.ticket_date[0]
+                                            );
+                                        }
+                                    },
+                                });
+
+
+
+
+
+                                // booking();
+                            }
+                        },
+                        onClose: function () {
+                            alert("Transaction cancelled");
+                        },
+                    });
+
+                    handler.openIframe();
 
                 }
 
@@ -799,7 +931,7 @@ $(document).ready(function () {
     );
 
     // Create Order
-    function createaccountthenorder(formData,_requestData) {
+    function createaccountthenorder(formData, _requestData) {
 
         $.ajax({
             headers: {
@@ -809,43 +941,95 @@ $(document).ready(function () {
             type: "POST",
             data: formData,
             dataType: "json",
-            beforeSend: function () {},
-            complete: function () {},
+            beforeSend: function () { },
+            complete: function () { },
             success: function (data) {
                 if (data.success == true && data.user) {
 
 
 
-                    FlutterwaveCheckout({
-                        public_key: $("input[name=flutterwave_key]").val(),
-                        tx_ref:
-                            Math.floor(Math.random() * (1000 - 9999 + 1)) + 9999,
-                        amount: $("#payment").val(),
-                        currency: $("input[name=currency_code]").val(),
-                        payment_options: " ",
-                        customer: {
-                            email: data.user.email,
-                            phone_number: data.user.phone,
-                            name: data.user.first_name,
-                        },
-                        meta:_requestData,
-                        callback: function (data) {
-                            if (data.status == "successful") {
-                                window.location.href = "/my-tickets";
+                    const amountKES = $("#payment").val();
+                    console.log("User Email:", $('input[name="usr_login_email"]').val());
+
+
+                    var handler = PaystackPop.setup({
+                        key: $("input[name=paystack_key]").val(), // Paystack public key
+                        email: $('input[name="usr_login_email"]').val(),
+                        amount: Math.round(amountKES) * 100, // Convert to cents (kobo equivalent)
+                        currency: "KES", // Set Kenyan Shilling
+                        ref: "TX" + Math.floor(Math.random() * 1000000000 + 1), // Generate transaction reference
+                        callback: function (response) {
+                            if (response.status == "success") {
+
+                                var requestData = {
+                                    payment: $("#payment").val(),
+                                    payment_token: response.reference,
+                                    payment_type: "PAYSTACK",
+                                    ticket_id: $("#ticket_id").val(),
+                                    coupon_code: $("#coupon_id").val(),
+                                    tax: $("#tax_total").val(),
+                                    quantity: $("#quantity").val(),
+                                    ticket_date: $("#onetime").val(),
+                                    selectedSeats:
+                                        $("#selectedSeats").val(),
+                                    selectedSeatsId:
+                                        $("#selectedSeatsId").val(),
+                                };
+                                console.log(requestData);
+
+
+                                $.ajax({
+                                    headers: {
+                                        "X-CSRF-TOKEN": $(
+                                            'meta[name="csrf-token"]'
+                                        ).attr("content"),
+                                    },
+                                    url: "/createOrder",
+                                    type: "POST",
+                                    data: requestData,
+
+                                    success: function (data) {
+                                        console.log(data);
+
+                                        if (data.success == true) {
+                                            window.location.href =
+                                                "/my-tickets";
+                                        } else {
+                                            $("#stripe_message").text(
+                                                data.message
+                                            );
+                                            $("#stripe_message").show();
+                                        }
+                                    },
+                                    error: function (data) {
+                                        if (data.status === 422) {
+                                            var errors =
+                                                data.responseJSON.errors;
+                                            console.log(
+                                                errors.ticket_date[0]
+                                            );
+                                            $(".ticket_date").text(
+                                                errors.ticket_date[0]
+                                            );
+                                        }
+                                    },
+                                });
+
+
+
+
+
+                                // booking();
                             }
                         },
                         onClose: function () {
-                            if (confirm("Are you sure you want to go to home page?")) {
-                                window.location.href = window.location.origin;
-                            }
-                        },
-                        customizations: {
-                            title: "Ticket Payment",
-                            description: "Ticket Payment",
+                            alert("Transaction cancelled");
                         },
                     });
 
-                }else {
+                    handler.openIframe();
+
+                } else {
                     alert("Error authenticating user")
                     window.location.reload()
                 }
@@ -1227,15 +1411,15 @@ $(document).ready(function () {
                 currency: currency,
             },
             dataType: "JSON",
-            beforeSend: function () {},
-            complete: function () {},
+            beforeSend: function () { },
+            complete: function () { },
             success: function (response) {
                 if (response.success == true) {
                     var newPath = "/user/wallet";
                     window.location.href = window.location.origin + newPath;
                 }
             },
-            error: function (response) {},
+            error: function (response) { },
         });
     }
 
@@ -1261,19 +1445,19 @@ $(document).ready(function () {
         slidesToShow: 1, // Number of slides to show at a time
         slidesToScroll: 1, // Number of slides to scroll at a time
         autoplay: true, // Auto play option
-        autoplaySpeed: 5000 ,// Auto play speed in milliseconds
+        autoplaySpeed: 5000,// Auto play speed in milliseconds
         dots: false, // Enable dots navigation
         arrows: false, // Enable arrows navigation
-      });
+    });
 
-      // Custom navigation button functionality
-      $('.hs-carousel-prev').click(function() {
+    // Custom navigation button functionality
+    $('.hs-carousel-prev').click(function () {
         $('.your-carousel').slick('slickPrev');
-      });
+    });
 
-      $('.hs-carousel-next').click(function() {
+    $('.hs-carousel-next').click(function () {
         $('.your-carousel').slick('slickNext');
-      });
+    });
 });
 
 function closeModal() {
