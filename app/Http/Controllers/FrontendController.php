@@ -594,70 +594,41 @@ class FrontendController extends Controller
 
     public function signinOrder(Request $request) {
 
-        $data = $request->all();
+        $request->validate([
+            'phone' => 'required',
+            'email_login' => 'required|email',
+        ]);
 
-        // if($request->activeTab == "tab1") {  
+        $user = AppUser::where('email', $request->email_login)->first();
 
-        //     try {
+        if ($user) {
+            // User exists, log them in directly without checking password
+            Auth::guard('appuser')->login($user);
+            $user['token'] = $user->createToken('eventRight')->accessToken;
+            return response()->json(['msg' => 'Login successful', 'user' => $user, 'success' => true], 200);
+        } else {
+            // User does not exist, create new user
+            $userdata = [
+                'phone' => $request->phone,
+                'image' => 'defaultuser.png',
+                'status' => 1,
+                'provider' => 'LOCAL',
+                'language' => Setting::first()->language,
+                'is_verify' => 1,
+                'email' => $request->email_login,
+                'password' => Hash::make($request->email_login),
+            ];
 
-        //         $userdata = array(
-        //                 'email' => $request->email_login,
-        //                 'password' => $request->password_login,
-        //             );
-        //         if (Auth::guard('appuser')->attempt($userdata)) {
-        //             $user =  Auth::guard('appuser')->user();
-        //             $user['token'] = $user->createToken('eventRight')->accessToken;
-        //             return response()->json(['msg' => 'Authentication success', 'user' => $user, 'success' => true], 200);
-        //         }else {
-        //             return response()->json(['msg' => 'Authentication failed', 'success' => false], 500);
-        //         }
+            $userResponse = AppUser::create($userdata);
 
-        //     } catch (\Exception $e) {
-        //         $resp = [
-        //             "message" => $e->getMessage(),
-        //             "statusCode" => 500,
-        //             "path" => request()->route()->uri
-        //         ];
-
-        //         Log::error($resp);
-        //         return response()->json($resp);
-        //     }
-
-
-        // }else
-        // if($request->activeTab == "tab2") {
-
-            $userdata = array(
-                    'phone' => $request->phone,
-                    'image' => "defaultuser.png",
-                    'status' => 1,
-                    'provider' => "LOCAL",
-                    'language' => Setting::first()->language,
-                    'is_verify' => 1,
-                    'email' => $request->email_login,
-                    'password' => Hash::make($request->email_login),
-                );
-                $userResponse = AppUser::create($userdata);
-                Log::info("User Response",['userResponse'=>$userResponse]);
-            if($userResponse) {
-
-                $udata = array(
-                    'email' => $request->email_login,
-                    'password' =>$request->email_login,
-                );
-
-                if (Auth::guard('appuser')->attempt($udata)) {
-                    $user =  Auth::guard('appuser')->user();
-                    $user['token'] = $user->createToken('eventRight')->accessToken;
-                    return response()->json(['msg' => 'Authentication success', 'user' => $user, 'success' => true], 200);
-                }else {
-                    return response()->json(['msg' => 'Authentication failed', 'success' => false], 500);
-                }
-
+            if ($userResponse) {
+                Auth::guard('appuser')->login($userResponse);
+                $userResponse['token'] = $userResponse->createToken('eventRight')->accessToken;
+                return response()->json(['msg' => 'Registration and login successful', 'user' => $userResponse, 'success' => true], 200);
             }
+        }
 
-        // }
-
+        return response()->json(['msg' => 'Something went wrong', 'success' => false], 500);
     }
 
 

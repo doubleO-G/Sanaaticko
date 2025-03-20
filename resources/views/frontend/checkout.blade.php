@@ -334,6 +334,19 @@
                                                                 alt="" class="object-contain"></label>
                                                     </div>
                                                 @endif
+                                                @if ($setting->paystack == 1)
+                                                     <div
+                                                         class="border border-gray-light p-5 rounded-lg text-gray-100 w-full font-normal font-poppins text-base leading-6 flex">
+                                                         <input id="Paystack" required type="radio" value="PAYSTACK"
+                                                             name="payment_type"
+                                                             class="h-5 w-5 mr-2 border border-gray-light  hover:border-gray-light focus:outline-none">
+                                                             <input type="hidden" name="paystack_key" value="{{ env('PAYSTACK_PUBLIC_KEY') }}">
+
+                                                         <label for="paystack"><img
+                                                                 src="{{ url('images/payments/paystack.svg') }}"
+                                                                 alt="" class="object-contain"></label>
+                                                     </div>
+                                                 @endif
 
                                                 @if ($setting->stripe == 1)
                                                     <div
@@ -359,7 +372,7 @@
                                                     </div>
                                                 @endif
 
-                                                @if (
+                                                {{-- @if (
                                                     $setting->cod == 1 ||
                                                         ($setting->flutterwave == 0 && $setting->stripe == 0 && $setting->paypal == 0 && $setting->razor == 0))
                                                     <div
@@ -371,7 +384,7 @@
                                                                 src="{{ url('images/payments/cash.svg') }}"
                                                                 alt="" class="object-contain"></label>
                                                     </div>
-                                                @endif
+                                                @endif --}}
                                                 @if ($setting->wallet == 1)
                                                     <div
                                                         class="border border-gray-light p-5 rounded-lg text-gray-100 w-full font-normal font-poppins text-base leading-6 flex">
