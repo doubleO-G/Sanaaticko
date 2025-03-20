@@ -16,6 +16,8 @@ class PaymentSetting extends Model
         'flutterwave',
         'stripeSecretKey',
         'stripePublicKey',
+        'paystackSecretKey',
+        'paystackPublicKey',
         'paypalClientId',
         'paypalSecret',
         'razorPublishKey',

@@ -83,8 +83,8 @@ class SettingController extends Controller
             'mail_username' => 'bail|required_if:mail_notification,1',
             'mail_password' => 'bail|required_if:mail_notification,1',
             'sender_email' => 'bail|required_if:mail_notification,1',
-            'mail_encryption'=> 'bail|required_if:mail_notification,1',
-            'mail_mailer'=> 'bail|required_if:mail_notification,1',
+            'mail_encryption' => 'bail|required_if:mail_notification,1',
+            'mail_mailer' => 'bail|required_if:mail_notification,1',
         ]);
         $this->updateEnvFile([
             'MAIL_MAILER' => $request->input('mail_mailer'),
@@ -104,7 +104,7 @@ class SettingController extends Controller
         try {
             Setting::find(1)->update($data);
         } catch (\Throwable $th) {
-           return redirect('admin-setting')->withStatus(__($th->getMessage()));
+            return redirect('admin-setting')->withStatus(__($th->getMessage()));
         }
         return redirect('admin-setting')->withStatus(__('Setting saved successfully.'));
     }
@@ -250,6 +250,8 @@ class SettingController extends Controller
         $request->validate([
             'stripeSecretKey' => 'bail|required_if:stripe,1',
             'stripePublicKey' => 'bail|required_if:stripe,1',
+            'paystackSecretKey' => 'bail|required_if:paystack,1',
+            'paystackPublicKey' => 'bail|required_if:paystack,1',
             'paypalClientId' => 'bail|required_if:paypal,1',
             'paypalSecret' => 'bail|required_if:paypal,1',
             'razorPublishKey' => 'bail|required_if:razor,1',

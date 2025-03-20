@@ -826,6 +826,30 @@
                                         </div>
 
                                     </div>
+                                    <div class="form-group row mb-4">
+
+                                        <label
+                                            class="col-form-label text-md-right col-12 col-md-3">{{ __('Paystack') }}</label>
+
+                                        <div class="col-sm-12 col-md-9">
+
+                                            <div class="custom-switches-stacked mt-2">
+
+                                                <label class="custom-switch pl-0">
+
+                                                    <input type="checkbox" name="paystack"
+                                                        {{ $payment->paystack == '1' ? 'checked' : '' }} value="1"
+                                                        class="custom-switch-input paymentCheckbox">
+
+                                                    <span class="custom-switch-indicator"></span>
+
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
 
                                     <div class="form-group row mb-4">
 
@@ -938,6 +962,47 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                             <a href="https://stripe.com/docs/keys#obtain-api-keys" target="_blank"
+                                                class="btn btn-primary demo-button mt-2">{{ __('Help') }}
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row mb-4">
+
+                                        <label
+                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Paystack secret key') }}</label>
+
+                                        <div class="col-sm-12 col-md-9">
+
+                                            <input type="text" name="paystackSecretKey"
+                                                placeholder="{{ __('Paystack secret key') }}"
+                                                value="{{ $payment->paystackSecretKey }}"
+                                                class="form-control @error('paystackSecretKey')? is-invalid @enderror">
+
+
+                                            @error('paystackSecretKey')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row mb-4">
+
+                                        <label
+                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Paystack public key') }}</label>
+
+                                        <div class="col-sm-12 col-md-9">
+
+                                            <input type="text" name="paystackPublicKey"
+                                                placeholder="{{ __('Paystack public key') }}"
+                                                value="{{ $payment->paystackPublicKey }}"
+                                                class="form-control @error('paystackPublicKey')? is-invalid @enderror">
+
+                                            @error('paystackPublicKey')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                            <a href="https://support.paystack.com/en/articles/2123458" target="_blank"
                                                 class="btn btn-primary demo-button mt-2">{{ __('Help') }}
                                             </a>
                                         </div>
@@ -1065,30 +1130,12 @@
                                             @enderror
 
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Flutterwave Webhook Secret Hash') }}</label>
-                                        <div class="col-sm-12 col-md-9">
-                                            <input type="text" name="raveWebhookSecretHash"
-                                                placeholder="{{ __('Kind of Webhook Acceptance Password') }}"
-                                                value="{{ $payment->raveWebhookSecretHash }}"
-                                                class="form-control @error('raveWebhookSecretHash')? is-invalid @enderror">
-                                            @error('raveWebhookSecretHash')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                            <p class="text-muted">{{ __('This secret hash key that will be used to verify the webhook events sent by Flutterwave.')}} </p>
-                                            <p>{{ __('Webhook URL:') }}<span class="tooltip-icon" data-toggle="tooltip" data-placement="top" title="{{ __('Works only in https & live server')}}">
-                                                <i class="fas fa-info-circle"></i>
-                                                ></span><strong>{{ url('user/flutterwave/webhook') }}</strong></p>
 
-                                                <a href="https://app.flutterwave.com/dashboard/settings/webhooks/live" target="_blank">{{ __('Click here to configure webhook.') }}</a>
-                                        </div>
                                     </div>
                                     <div class="form-group row mb-4">
 
                                         <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Flutterwave Test mode') }}</label>
+                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Flutterwave Debugg mode') }}</label>
 
                                         <div class="col-sm-12 col-md-9">
 
@@ -1145,7 +1192,7 @@
 
                             <h4>{{ __('Mail Notification') }}</h4>
 
-                            <p>{{ __('Email SMTP configuration settings and email notifications related to email. Sometimes, your host might need authentication with 2FA App Password instead of regular mail password.') }}
+                            <p>{{ __('Email SMTP configuration settings and email notifications related to email.') }}
 
                             </p>
 
@@ -2106,42 +2153,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
-                                    <div class="form-group row mb-4">
-                                        <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Show Brands Carousel') }}</label>
-                                        <div class="col-sm-12 col-md-9">
-                                            <div class="custom-switches-stacked mt-2">
-                                                <label class="custom-switch pl-0">
-                                                    <input type="checkbox" name="show_brands_carousel"
-                                                        {{ $setting->show_brands_carousel == 1 ? 'checked' : '' }}
-                                                        value="1" class="custom-switch-input">
-                                                    <span class="custom-switch-indicator"></span>
-                                                </label>
-                                            </div>
-                                            @error('show_brands_carousel')
-                                                <div class="invalid-feedback block">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-4">
-                                        <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Show App Event Report Form') }}</label>
-                                        <div class="col-sm-12 col-md-9">
-                                            <div class="custom-switches-stacked mt-2">
-                                                <label class="custom-switch pl-0">
-                                                    <input type="checkbox" name="show_event_report_form"
-                                                        {{ $setting->show_event_report_form == 1 ? 'checked' : '' }}
-                                                        value="1" class="custom-switch-input">
-                                                    <span class="custom-switch-indicator"></span>
-                                                </label>
-                                            </div>
-                                            @error('show_event_report_form')
-                                                <div class="invalid-feedback block">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="form-group row mb-4">
                                         <label
                                             class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('App GooglePlay Link') }}</label>
@@ -2202,9 +2213,9 @@
 
                         <div class="card-body">
 
-                            <h4>{{ __('Appuser Setting') }}</h4>
+                            <h4>{{ __('Appuser Privacy Policy') }}</h4>
 
-                            <p>{{ __('Describe appuser privacy policy, terms & conditions, cookie policy, acknowledgement, help center') }}
+                            <p>{{ __('Describe appuser privacy policy') }}
 
                             </p>
 
@@ -2225,7 +2236,9 @@
 
                                         <textarea name="appuser_privacy_policy" Placeholder="{{ __('Privacy policy') }}"
                                             class="textarea_editor @error('appuser_privacy_policy')? is-invalid @enderror">
-                                            {{ old('appuser_privacy_policy', $setting->appuser_privacy_policy) }}
+
+                                            {{ $setting->appuser_privacy_policy }}
+
                                         </textarea>
 
                                         @error('appuser_privacy_policy')
@@ -2234,153 +2247,6 @@
 
                                     </div>
 
-                                    <div class="form-group ">
-                                        <label>{{ __('Terms & Service') }}</label>
-                                        <textarea name="terms_services" Placeholder="{{ __('Terms Services') }}"
-                                            class="textarea_editor @error('terms_services')? is-invalid @enderror">
-                                            {{ old('terms_services', $setting->terms_services) }}
-                                        </textarea>
-                                        @error('terms_services')
-                                            <div class="invalid-feedback block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group ">
-                                        <label>{{ __('Cookie Policy') }}</label>
-                                        <textarea name="cookie_policy" Placeholder="{{ __('Cookie Policy') }}"
-                                            class="textarea_editor @error('cookie_policy')? is-invalid @enderror">
-                                            {{ old('cookie_policy', $setting->cookie_policy) }}
-                                        </textarea>
-                                        @error('cookie_policy')
-                                            <div class="invalid-feedback block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group ">
-                                        <label>{{ __('Acknowledgement') }}</label>
-                                        <textarea name="acknowledgement" Placeholder="{{ __('Acknowledgement') }}"
-                                            class="textarea_editor @error('acknowledgement')? is-invalid @enderror">
-                                            {{ old('acknowledgement', $setting->acknowledgement) }}
-                                        </textarea>
-                                        @error('acknowledgement')
-                                            <div class="invalid-feedback block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-form-label">{{ __('Help Center') }}</label>
-                                        <input type="url" name="help_center"
-                                            placeholder="{{ __('Help center') }}"
-                                            value="{{ $setting->help_center }}"
-                                            class="form-control @error('help_center')? is-invalid @enderror">
-                                        @error('help_center')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="form-group">
-
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-
-                                        <div class="col-sm-12 col-md-7">
-
-                                            <button type="submit"
-                                                class="btn btn-primary demo-button">{{ __('Save') }}</button>
-
-                                        </div>
-
-                                    </div>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-6">
-
-                    <div class="card card-large-icons">
-
-                        <div class="card-icon bg-primary text-white">
-
-                            <i class="fas fa-solid fa-sign-in-alt"></i>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <h4>{{ __('Google Sign-in') }}</h4>
-
-                            <p>{{ __('After setting this ON, Google Sign-in will be enabled for the customers & organizers in website sign-in page') }}
-                                <br><b>{{ __('Callback URL:') }}</b> {{ url('login/google/callback') }}
-                            </p>
-
-                            <a href="#googleSignin" aria-controls="additional-setting" role="button"
-                                data-toggle="collapse" class="card-cta"
-                                aria-expanded="false">{{ __('Change Setting') }} <i
-                                    class="fas fa-chevron-right"></i></a>
-
-                            <div class="collapse mt-3" id="googleSignin">
-
-                                <form method="post" action="{{ url('save-google-signin-setting') }}">
-
-                                    @csrf
-
-                                    <div class="form-group row mb-4">
-
-                                        <label class="col-form-label col-12 col-md-4">{{ __('Google Sign-in') }}</label>
-
-                                        <div class="col-sm-12 col-md-8">
-
-                                            <div class="custom-switches-stacked mt-2">
-
-                                                <label class="custom-switch pl-0">
-
-                                                    <input type="checkbox" name="enable_google_signin"
-                                                        {{ $setting->enable_google_signin == 1 ? 'checked' : '' }}
-                                                        value="1" class="custom-switch-input">
-
-                                                    <span class="custom-switch-indicator"></span>
-
-                                                </label>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group row mb-4">
-                                        <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Client ID') }}</label>
-                                        <div class="col-sm-12 col-md-9">
-                                            <input type="text" name="google_client_id"
-                                                placeholder="{{ __('Client ID') }}"
-                                                value="{{ $setting->google_client_id }}"
-                                                class="form-control @error('google_client_id')? is-invalid @enderror">
-                                            @error('google_client_id')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">{{ __('Client Secret') }}</label>
-                                        <div class="col-sm-12 col-md-9">
-                                            <input type="text" name="google_client_secret"
-                                                placeholder="{{ __('Client Secret') }}"
-                                                value="{{ $setting->google_client_secret }}"
-                                                class="form-control @error('google_client_secret')? is-invalid @enderror">
-                                            @error('google_client_secret')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
 
                                     <div class="form-group">
 
